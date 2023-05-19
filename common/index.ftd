@@ -1,0 +1,25 @@
+-- import: fastn-community.github.io/spectrum-ds/assets
+
+-- import: fastn/processors as pr
+
+-- boolean show-footer: true
+
+
+-- string $site-name: Templates
+
+
+-- integer logo-width: 200
+
+-- integer logo-height: 32
+
+
+-- string $site-url: index.html
+
+
+-- pr.toc-item list footer-toc:
+
+-- pr.sitemap-data sitemap:
+$processor$: pr.sitemap
+
+-- fastn.app-ui apps:
+$processor$: pr.fastn-apps
