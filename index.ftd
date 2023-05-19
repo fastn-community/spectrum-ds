@@ -151,7 +151,7 @@ site-name: $doc-page-desktop.site-name
 logo-height: $doc-page-desktop.logo-height
 logo-width: $doc-page-desktop.logo-width
 current-url: /
-menu-icon: $assets.files.static.header.hamburger-dark.svg
+menu-icon: $assets.files.static.header.hamber.svg
 
 -- ftd.column:
 max-width.fixed.percent: 63.5
