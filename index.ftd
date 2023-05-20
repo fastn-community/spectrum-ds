@@ -163,7 +163,7 @@ spacing.fixed.px: 16
 
 -- ftd.text: $doc-page-desktop.title
 if: { doc-page-desktop.title != NULL }
-role: $inherited.types.heading-hero
+role: $inherited.types.heading-large
 color: $inherited.colors.text-strong
 
 -- ftd.text: 
