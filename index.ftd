@@ -192,6 +192,7 @@ min-height.fixed.calc: 100vh - 135px
 children: $doc-page-desktop.wrapper
 spacing.fixed.em: 0.8
 padding-left.px: 30
+padding-right.px: 48
 
 -- end: ftd.column
 
