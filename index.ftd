@@ -93,6 +93,27 @@ logo-width: $page.logo-width
 
 -- end: ftd.desktop
 
+
+-- ftd.mobile:
+
+-- doc-page-mobile: $page.title
+wrapper: $page.wrapper
+toc: $page.toc
+footer-toc: $page.footer-toc
+sections: $page.sections
+current-section: $page.current-section
+current-subsection: $page.current-subsection
+current-page: $page.current-page
+sub-sections: $page.sub-sections
+body: $page.body
+site-name: $page.site-name
+site-logo: $page.site-logo
+site-url: $page.site-url
+logo-height: $page.logo-height
+logo-width: $page.logo-width
+
+-- end: ftd.mobile
+
 -- dms.dark-mode-switcher-float:
 
 -- ftd.column:
@@ -514,3 +535,150 @@ url: $obj.url
 -- end: ftd.column
 
 -- end: footer-instance
+
+
+
+
+
+
+
+
+
+
+-- component doc-page-mobile:
+optional caption title:
+optional body body:
+optional string site-name:
+ftd.image-src site-logo:
+string site-url:
+pr.toc-item list toc: 
+pr.toc-item list sections:
+pr.toc-item list sub-sections:
+pr.toc-item list extra:
+ftd.ui list extra-headers:
+boolean $open-right-sidebar-info: false
+pr.toc-item list footer-toc: 
+optional pr.toc-item current-section:
+optional pr.toc-item current-page:
+optional pr.toc-item current-subsection:
+boolean right-sidebar: false
+children wrapper:
+optional integer logo-width: 
+optional integer logo-height: 
+
+-- ftd.column:
+width: fill-container
+background.solid:$inherited.colors.background.base
+
+-- h.header:
+sections: $doc-page-mobile.sections
+sub-sections: $doc-page-mobile.sub-sections
+toc: $doc-page-mobile.toc
+current-section: $doc-page-mobile.current-section
+current-subsection: $doc-page-mobile.current-subsection
+current-page: $doc-page-mobile.current-page
+site-logo: $doc-page-mobile.site-logo
+site-url: $doc-page-mobile.site-url
+site-name: $doc-page-mobile.site-name
+logo-height: $doc-page-mobile.logo-height
+logo-width: $doc-page-mobile.logo-width
+current-url: /
+menu-icon: $assets.files.static.header.hamburger.svg
+
+-- ftd.column:
+width: fill-container
+padding-horizontal.px: 24
+padding-vertical.px: 24
+min-height.fixed.calc: 100vh
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.row:
+width: fill-container
+
+-- tf.h0: $doc-page-mobile.title
+if: { doc-page-mobile.title != NULL }
+
+-- ftd.column:
+if: { doc-page-mobile.right-sidebar }
+align-content: center
+padding-top.px: 8
+
+-- ftd.image:
+src: $assets.files.static.info-icon.svg
+width.fixed.px: 36
+$on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
+
+-- end: ftd.column
+
+-- end: ftd.row
+
+-- end: ftd.column
+
+
+-- tf.markdown:
+if: {doc-page-mobile.body != NULL}
+
+$doc-page-mobile.body
+
+-- ftd.column:
+children: $doc-page-mobile.wrapper
+spacing.fixed.px: 32
+width.fixed.percent: 100
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { doc-page-mobile.open-right-sidebar-info }
+anchor: parent
+top.px: 0
+bottom.px: 0
+left.px: 0
+right.px: 0
+background.solid: $inherited.colors.background.overlay
+z-index: 1
+width: fill-container
+height.fixed.calc: 100% - 0px
+$on-click$: $ftd.set-bool($a = $doc-page-mobile.open-right-sidebar-info, v = false)
+
+
+-- ftd.image:
+src: $assets.files.static.cross-dark.svg
+height.fixed.px: 16
+width: auto
+margin-top.px: 30
+margin-left.px: 16
+$on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
+
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { doc-page-mobile.open-right-sidebar-info }
+width.fixed.calc: 100% - 48px
+height.fixed.calc: 100% - 0px
+overflow-y: auto
+align-content: top-right
+anchor: parent
+right.px: 0
+top.px: 0
+background.solid: $inherited.colors.background.step-1
+z-index: 1
+padding-horizontal.px: 24
+children: $doc-page-mobile.extra-headers
+
+-- end: ftd.column
+
+-- end: ftd.column
+
+-- footer:
+if: { !ftd.is_empty(doc-page-mobile.footer-toc) }
+footer-toc: $doc-page-mobile.footer-toc
+
+
+-- end: ftd.column
+
+
+-- end: doc-page-mobile
+
