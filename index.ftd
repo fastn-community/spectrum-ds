@@ -171,6 +171,7 @@ if: { doc-page-desktop.body != NULL }
 text: $doc-page-desktop.body
 role: $inherited.types.copy-regular
 color: $inherited.colors.text
+text-align: center
 
 -- end: ftd.column
 
@@ -178,7 +179,6 @@ color: $inherited.colors.text
 width: fill-container
 spacing.fixed.px: 32
 align-content if { ftd.is_empty(doc-page-desktop.toc) }: center
-padding-horizontal.px: 63
 
 -- render-toc:
 if: { !ftd.is_empty(doc-page-desktop.toc) }
@@ -191,6 +191,7 @@ min-height.fixed.calc if { !ftd.is_empty(doc-page-desktop.toc) }: 100vh
 min-height.fixed.calc: 100vh - 135px
 children: $doc-page-desktop.wrapper
 spacing.fixed.em: 0.8
+padding-left.px: 30
 
 -- end: ftd.column
 
