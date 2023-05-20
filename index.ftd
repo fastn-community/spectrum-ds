@@ -583,7 +583,7 @@ site-name: $doc-page-mobile.site-name
 logo-height: $doc-page-mobile.logo-height
 logo-width: $doc-page-mobile.logo-width
 current-url: /
-menu-icon: $assets.files.static.header.hamburger.svg
+menu-icon: $assets.files.static.hamburger.svg
 
 -- ftd.column:
 width: fill-container
