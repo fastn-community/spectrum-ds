@@ -2,8 +2,16 @@
 
 -- fastn.package: fastn-community.github.io/spectrum-ds
 
--- fastn.dependency: fastn-community.github.io/doc-site as ds
--- fastn.dependency: fifthtry.github.io/bling as bling
+-- fastn.dependency: fastn-community.github.io/header
+-- fastn.dependency: fastn-community.github.io/typography
+-- fastn.dependency: fastn-community.github.io/dark-mode-switcher
 
--- fastn.auto-import: bling/chat as chat
--- fastn.auto-import: ds
+-- fastn.auto-import: fastn
+-- fastn.auto-import: fastn-community.github.io/header as h
+-- fastn.auto-import: fastn-community.github.io/typography as tf
+
+-- fastn.sitemap:
+
+# Home: /index.html
+
+- Overview: index.html
