@@ -60,6 +60,8 @@ ftd.color-scheme colors: $ftd.default-colors
 pr.toc-item list footer-toc: $common.footer-toc
 boolean show-footer: $common.show-footer
 ftd.ui list footer:
+boolean github-icon: false
+optional string github-url: 
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -92,6 +94,8 @@ site-logo: $page.site-logo
 site-url: $page.site-url
 logo-height: $page.logo-height
 logo-width: $page.logo-width
+github-icon: $page.github-icon
+github-url: $page.github-url
 
 -- end: ftd.desktop
 
@@ -113,6 +117,8 @@ site-logo: $page.site-logo
 site-url: $page.site-url
 logo-height: $page.logo-height
 logo-width: $page.logo-width
+github-icon: $page.github-icon
+github-url: $page.github-url
 
 -- end: ftd.mobile
 
@@ -157,6 +163,8 @@ optional pr.toc-item current-subsection:
 children wrapper:
 optional integer logo-width: 
 optional integer logo-height: 
+boolean github-icon: false
+optional string github-url: 
 
 -- ftd.column:
 width: fill-container
@@ -175,6 +183,8 @@ logo-height: $doc-page-desktop.logo-height
 logo-width: $doc-page-desktop.logo-width
 current-url: /
 menu-icon: $assets.files.static.hamburger.svg
+github-icon: $doc-page-desktop.github-icon
+github-url: $doc-page-desktop.github-url
 
 -- ftd.column:
 max-width.fixed.percent: 63.5
@@ -567,6 +577,8 @@ boolean right-sidebar: false
 children wrapper:
 optional integer logo-width: 
 optional integer logo-height: 
+boolean github-icon: false
+optional string github-url: 
 
 -- ftd.column:
 width: fill-container
@@ -586,6 +598,8 @@ logo-height: $doc-page-mobile.logo-height
 logo-width: $doc-page-mobile.logo-width
 current-url: /
 menu-icon: $assets.files.static.hamburger.svg
+github-icon: $doc-page-mobile.github-icon
+github-url: $doc-page-mobile.github-url
 
 -- ftd.column:
 width: fill-container
