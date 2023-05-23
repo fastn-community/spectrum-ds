@@ -13,6 +13,7 @@
 
 
 -- page: Featured Components
+site-name: NULL
 
 Amet minim mollit non deserunt ullamco est sit 
 aliqua dolor do amet sint. Velit officia 
@@ -43,7 +44,7 @@ optional string document-title:
 optional string document-description:
 optional ftd.raw-image-src document-image: 
 optional body body:
-optional ftd.image-src site-logo: 
+optional ftd.image-src site-logo: $common.site-logo
 integer logo-width: $common.logo-width
 integer logo-height: $common.logo-height
 optional string $site-url: $common.site-url
@@ -697,4 +698,3 @@ footer-toc: $doc-page-mobile.footer-toc
 
 
 -- end: doc-page-mobile
-

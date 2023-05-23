@@ -5,7 +5,7 @@
 -- boolean show-footer: true
 
 
--- string $site-name: Templates
+-- string $site-name: Spectum DS
 
 
 -- integer logo-width: 200
@@ -14,6 +14,8 @@
 
 
 -- string $site-url: index.html
+
+-- ftd.image-src site-logo: $assets.files.static.ipsum-logo.svg
 
 
 -- pr.toc-item list footer-toc:
