@@ -28,6 +28,7 @@ previous-url: /
 
 
 -- distributors: 
+owners: $common.owners
 license-url: /
 license: Creative Commons
 published-date:  28-April-2023
@@ -1190,6 +1191,7 @@ white-space: nowrap
 
 -- component distributors:
 optional caption title: 
+common.owner list owners:
 string license-url: 
 string license: 
 string published-date: 
@@ -1214,7 +1216,7 @@ color: $inherited.colors.text
 margin-bottom.px: 16
 
 -- user:
-owners: $common.owners
+owners: $distributors.owners
 
 -- ftd.column:
 spacing.fixed.px: 30
