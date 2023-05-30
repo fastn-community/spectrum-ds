@@ -26,7 +26,8 @@ previous-url: /
 
 -- page.abstract-bar:
 
--- distributive-layout: 
+
+-- distributors: 
 license-url: /
 license: Creative Commons
 published-date:  28-April-2023
@@ -802,9 +803,10 @@ width.fixed.percent: 22
 width.fixed.percent if { ftd.device == "mobile" }: 40
 align-content: center
 spacing.fixed.rem: 0.56
+open-in-new-tab: true
+link: $preview-card.cta-url
 
 -- ftd.text: $preview-card.cta-text
-link: $preview-card.cta-url
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-medium
 
@@ -1101,6 +1103,7 @@ link: $layout.cta-url
 align-content: center
 width.fixed.px: 236
 border-radius.px: 5
+open-in-new-tab: true
 
 -- ftd.text: $layout.cta-text
 color: $inherited.colors.background.step-1
@@ -1151,6 +1154,8 @@ $loop$: $user.owners as $obj
 
 
 
+
+
 -- component user-loop:
 caption title:
 optional string profile:
@@ -1159,13 +1164,13 @@ optional ftd.image-src avatar:
 -- ftd.row:
 spacing.fixed.px: 16
 align-content: center
+open-in-new-tab: true
+link: $user-loop.profile
 
 -- ftd.image: 
 src: $user-loop.avatar
-link: $user-loop.profile
 
 -- ftd.text: $user-loop.title
-link: $user-loop.profile
 role: $common.copy-small
 color: $inherited.colors.text-strong
 white-space: nowrap
@@ -1183,7 +1188,7 @@ white-space: nowrap
 
 
 
--- component distributive-layout:
+-- component distributors:
 optional caption title: 
 string license-url: 
 string license: 
@@ -1215,24 +1220,24 @@ owners: $common.owners
 spacing.fixed.px: 30
 
 -- title-text: License:
-text: $distributive-layout.license
-url: $distributive-layout.license
+text: $distributors.license
+url: $distributors.license
 
 -- title-text: Date Of Publish:
-text: $distributive-layout.published-date
+text: $distributors.published-date
 
 -- title-text: Used by:
-if: { distributive-layout.used-by != NULL }
-text: $distributive-layout.used-by
+if: { distributors.used-by != NULL }
+text: $distributors.used-by
 
 -- title-text: likes:
-if: { distributive-layout.likes != NULL }
-text: $distributive-layout.likes
+if: { distributors.likes != NULL }
+text: $distributors.likes
 
 -- end: ftd.column
 
 -- ftd.text: Author connect:
-if: { !ftd.is_empty(distributive-layout.social-links) }
+if: { !ftd.is_empty(distributors.social-links) }
 color: $inherited.colors.text
 role: $common.copy-small
 margin-bottom.px: 16
@@ -1242,16 +1247,17 @@ margin-top.px: 30
 spacing.fixed.px: 24
 
 -- ftd.image:
-$loop$: $distributive-layout.social-links as $obj
+$loop$: $distributors.social-links as $obj
 src: $obj.src
 cursor: pointer
 link: $obj.link
+open-in-new-tab: true
 
 -- end: ftd.row
 
 -- end: ftd.column
 
--- end: distributive-layout
+-- end: distributors
 
 
 
