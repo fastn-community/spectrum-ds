@@ -38,6 +38,9 @@ $processor$: pr.fastn-apps
 
 
 
+
+
+
 -- record template:
 caption title:
 string template-url: 
@@ -53,8 +56,8 @@ boolean is-last: false
 template-url: https://fastn-community.github.io/doc-site/
 screenshot: $assets.files.static.doc-site.jpg
 
-
 -- end: doc-sites
+
 
 
 
@@ -98,29 +101,16 @@ caption title:
 optional string profile:
 optional ftd.image-src avatar:
 
-
-
-
-
-
 -- owner list owners:
 
 -- owner: Muskaan Verma
 profile: /
 avatar: $assets.files.static.avatar.svg
 
-
--- owner: Muskaan Verma2
-profile: /
-avatar: $assets.files.static.avatar.svg
-
-
--- owner: Muskaan Verma1
-profile: /
-avatar: $assets.files.static.avatar.svg
-
-
 -- end: owners
+
+
+
 
 
 
