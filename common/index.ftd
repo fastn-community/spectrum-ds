@@ -1,4 +1,7 @@
 -- import: fastn-community.github.io/spectrum-ds/assets
+-- import:  fastn-community.github.io/opensans-font/assets as opensans-assets
+
+
 
 -- import: fastn/processors as pr
 
@@ -20,8 +23,114 @@
 
 -- pr.toc-item list footer-toc:
 
+-- boolean show-grid: true
+
+-- boolean show-list: false
+
+
+
 -- pr.sitemap-data sitemap:
 $processor$: pr.sitemap
 
 -- fastn.app-ui apps:
 $processor$: pr.fastn-apps
+
+
+
+
+-- record template:
+caption title:
+string template-url: 
+optional ftd.image-src screenshot:
+optional string licence-url: 
+optional string github-url:
+optional body body: 
+boolean is-last: false
+
+-- template list doc-sites:
+
+-- template: Doc-site
+template-url: https://fastn-community.github.io/doc-site/
+screenshot: $assets.files.static.doc-site.jpg
+
+
+-- end: doc-sites
+
+
+
+
+-- record social-media:
+ftd.image-src src:
+string link: /
+
+-- social-media list social-links:
+
+
+
+-- record owner:
+caption title:
+optional string profile:
+optional ftd.image-src avatar:
+
+
+
+
+
+
+-- owner list owners:
+
+-- owner: Muskaan Verma
+profile: /
+avatar: $assets.files.static.avatar.svg
+
+
+-- owner: Muskaan Verma2
+profile: /
+avatar: $assets.files.static.avatar.svg
+
+
+-- owner: Muskaan Verma1
+profile: /
+avatar: $assets.files.static.avatar.svg
+
+
+-- end: owners
+
+
+
+-- ftd.type copy-regular-mobile:
+line-height.px: 24
+size.px: 16
+letter-spacing.px: 0
+weight: 700
+font-family: $opensans-assets.fonts.Open-Sans
+
+-- ftd.type copy-regular-desktop:
+line-height.px: 57
+size.px: 24
+letter-spacing.px: 0
+font-family: $opensans-assets.fonts.Open-Sans
+weight: 700
+
+-- ftd.responsive-type copy-regular:
+desktop: $copy-regular-desktop
+mobile: $copy-regular-mobile
+
+
+-- ftd.type copy-small-mobile:
+size.px: 16
+line-height.px: 24
+weight: 400
+font-family: $opensans-assets.fonts.Open-Sans
+
+-- ftd.type copy-small-desktop:
+size.px: 14
+line-height.px: 30
+weight: 400
+font-family: $opensans-assets.fonts.Open-Sans
+
+-- ftd.responsive-type copy-small:
+desktop: $copy-small-desktop
+mobile: $copy-small-mobile
+
+

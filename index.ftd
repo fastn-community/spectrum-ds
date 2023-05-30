@@ -2,7 +2,7 @@
 -- import: fastn/processors as pr
 -- import: fastn-community.github.io/spectrum-ds/common
 -- import: fastn-community.github.io/dark-mode-switcher as dms
-
+-- import: fastn-community.github.io/inter-typography as typo
 
 
 
@@ -14,13 +14,41 @@
 
 -- page: Featured Components
 site-name: NULL
+distribution-bar: true
+
+-- page.layout-bar:
+
+-- layout: 
+cta-url: https://github.com/fastn-community/spectrum-ds
+previous-url: /
+
+-- end: page.layout-bar
+
+-- page.abstract-bar:
+
+-- distributive-layout: 
+license-url: /
+license: Creative Commons
+published-date:  28-April-2023
+used-by: 512 +
+likes: 750 Likes
+
+-- end: page.abstract-bar
+
+-- page.body:
 
 Amet minim mollit non deserunt ullamco est sit 
 aliqua dolor do amet sint. Velit officia 
 consequat duis enim velit mollit.
 Exercitation veniam consequat sunt nostrud amet.
 
--- tf.h2: Featured Components
+-- preview-card:
+image: $assets.files.static.background.svg
+cta-url:/
+
+-- grid-view: Documentation Sites:
+if: { common.show-grid }
+templates: $common.doc-sites
 
 Amet minim mollit non deserunt ullamco est sit 
 aliqua dolor do amet sint. Velit officia 
@@ -28,6 +56,8 @@ consequat duis enim velit mollit.
 Exercitation veniam consequat sunt nostrud amet.
 
 -- end: page
+
+
 
 
 
@@ -56,13 +86,16 @@ optional pr.toc-item current-section: $common.sitemap.current-section
 optional pr.toc-item current-subsection: $common.sitemap.current-subsection
 optional pr.toc-item current-page: $common.sitemap.current-page
 children wrapper:
-ftd.type-data types: $ftd.default-types
+ftd.type-data types: $typo.types
 ftd.color-scheme colors: $ftd.default-colors
 pr.toc-item list footer-toc: $common.footer-toc
 boolean show-footer: $common.show-footer
 ftd.ui list footer:
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar: false
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -97,6 +130,10 @@ logo-height: $page.logo-height
 logo-width: $page.logo-width
 github-icon: $page.github-icon
 github-url: $page.github-url
+abstract-bar: $page.abstract-bar
+layout-bar: $page.layout-bar
+distribution-bar: $page.distribution-bar
+
 
 -- end: ftd.desktop
 
@@ -166,6 +203,10 @@ optional integer logo-width:
 optional integer logo-height: 
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar:
+
 
 -- ftd.column:
 width: fill-container
@@ -188,6 +229,15 @@ github-icon: $doc-page-desktop.github-icon
 github-url: $doc-page-desktop.github-url
 
 -- ftd.column:
+if: { doc-page-desktop.distribution-bar }
+width: fill-container
+children: $doc-page-desktop.layout-bar
+
+-- end: ftd.column
+
+
+-- ftd.column:
+if: { !doc-page-desktop.distribution-bar }
 max-width.fixed.percent: 63.5
 align-self: center
 margin-top.px: 50
@@ -207,16 +257,33 @@ role: $inherited.types.copy-regular
 color: $inherited.colors.text
 text-align: center
 
+
 -- end: ftd.column
 
 -- ftd.row:
 width: fill-container
 spacing.fixed.px: 32
 align-content if { ftd.is_empty(doc-page-desktop.toc) }: center
+padding-horizontal.px if { doc-page-desktop.distribution-bar }: 53
+margin-top.px if { doc-page-desktop.distribution-bar }: 50
+
+
+-- ftd.column:
+if: { doc-page-desktop.distribution-bar }
+children: $doc-page-desktop.abstract-bar
+width.fixed.percent: 35
+
+-- end: ftd.column
+
+-- ftd.column:
+width.fixed.percent: 30
+if: { !doc-page-desktop.distribution-bar }
 
 -- render-toc:
 if: { !ftd.is_empty(doc-page-desktop.toc) }
 toc-obj: $doc-page-desktop.toc
+
+-- end: ftd.column
 
 -- ftd.column:
 width: fill-container
@@ -225,10 +292,12 @@ min-height.fixed.calc if { !ftd.is_empty(doc-page-desktop.toc) }: 100vh
 min-height.fixed.calc: 100vh - 135px
 children: $doc-page-desktop.wrapper
 spacing.fixed.em: 0.8
-padding-left.px: 30
-padding-right.px: 48
+padding-left.px if { !doc-page-desktop.distribution-bar }: 30
+padding-right.px if { !doc-page-desktop.distribution-bar }: 48
 
 -- end: ftd.column
+
+
 
 -- end: ftd.row
 
@@ -258,9 +327,9 @@ top.px: 0
 left.px: 24
 min-width.fixed.percent: 20
 min-height.fixed.calc: 100vh - 0px
-height.fixed.vh: 100
+height.fixed.calc: 100% - 0px
 overflow-y: auto
-width.fixed.percent: 30
+width: fill-container
 align-content: top-left
 border-right-width.px: 1
 border-color: $inherited.colors.border
@@ -633,7 +702,6 @@ $on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
 
 -- end: ftd.column
 
-
 -- tf.markdown:
 if: {doc-page-mobile.body != NULL}
 
@@ -659,7 +727,6 @@ width: fill-container
 height.fixed.calc: 100% - 0px
 $on-click$: $ftd.set-bool($a = $doc-page-mobile.open-right-sidebar-info, v = false)
 
-
 -- ftd.image:
 src: $assets.files.static.cross-dark.svg
 height.fixed.px: 16
@@ -667,7 +734,6 @@ width: auto
 margin-top.px: 30
 margin-left.px: 16
 $on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
-
 
 -- end: ftd.column
 
@@ -693,8 +759,528 @@ children: $doc-page-mobile.extra-headers
 if: { !ftd.is_empty(doc-page-mobile.footer-toc) }
 footer-toc: $doc-page-mobile.footer-toc
 
+-- end: ftd.column
+
+-- end: doc-page-mobile
+
+
+
+
+
+
+
+
+
+
+-- component preview-card:
+optional caption title:
+ftd.image-src image:
+string cta-url: /
+string cta-text: Preview
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 30
+margin-bottom.px: 100
+
+-- ftd.text: $preview-card.title
+if: { preview-card.title != NULL}
+role: $inherited.types.heading-medium
+
+-- ftd.image:
+src: $preview-card.image
+width: fill-container
+height: auto
+
+-- ftd.row:
+border-color: $inherited.colors.accent.primary
+border-radius.px: 5
+border-width.px: 1
+padding-vertical.rem: 0.94
+padding-horizontal.rem: 1.25
+width.fixed.percent: 22
+width.fixed.percent if { ftd.device == "mobile" }: 40
+align-content: center
+spacing.fixed.rem: 0.56
+
+-- ftd.text: $preview-card.cta-text
+link: $preview-card.cta-url
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-medium
+
+-- ftd.image:
+src: $assets.files.static.right-arrow.svg
+
+-- end: ftd.row
 
 -- end: ftd.column
 
+-- end: preview-card
 
--- end: doc-page-mobile
+
+
+
+
+
+
+
+
+
+
+-- component grid-view:
+optional caption title:
+common.template list templates:
+optional string more-link: 
+optional string more-link-text: 
+boolean $hover: false
+optional body body:
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.row:
+width: fill-container
+align-content: center
+margin-top.px if { ftd.device == "mobile" }: 24
+
+-- ftd.desktop:
+
+-- ftd.text: $grid-view.title
+if: { grid-view.title != NULL }
+role: $inherited.types.heading-medium
+color: $inherited.colors.accent.primary
+width: fill-container
+
+-- end: ftd.desktop
+
+
+-- ftd.mobile:
+
+-- ftd.text: $grid-view.title
+if: { grid-view.title != NULL }
+role: $inherited.types.copy-large
+color: $inherited.colors.text
+width: fill-container
+align-self: center
+
+-- end: ftd.mobile
+
+-- ftd.row:
+if: { grid-view.more-link-text != NULL}
+align-content: center
+spacing.fixed.px: 6
+link: $grid-view.more-link
+
+-- ftd.text: $grid-view.more-link-text
+role: $inherited.types.button-medium
+color: $inherited.colors.text-strong
+$on-mouse-enter$: $ftd.set-bool($a=$grid-view.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a=$grid-view.hover, v = false)
+white-space: nowrap
+border-bottom-width.px: 1
+border-color: $inherited.colors.background.step-1
+border-color if { grid-view.hover }: $inherited.colors.cta-primary.base
+color if { grid-view.hover }: $inherited.colors.cta-primary.base
+
+-- ftd.image:
+src: $assets.files.static.featured.arrow.svg
+width: auto
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- ftd.text:
+if: { grid-view.body != NULL }
+role: $inherited.types.copy-regular
+color: $inherited.colors.text
+margin-top.px: 16
+
+$grid-view.body
+
+-- ftd.desktop:
+
+-- ftd.row:
+width: fill-container
+wrap: true
+spacing.fixed.px: 13
+margin-top.px if { grid-view.more-link-text != NULL }: 60
+margin-top.px if { grid-view.more-link-text == NULL }: 30
+margin-bottom.px: 40
+
+-- grid-of-items: $obj.title
+$loop$: $grid-view.templates as $obj
+template-url: $obj.template-url
+licence-url: $obj.licence-url
+github-url: $obj.github-url
+screenshot: $obj.screenshot
+body: $obj.body
+is-last: $obj.is-last
+
+-- end: ftd.row
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width.fixed.percent: 100
+
+-- grid-of-items: $obj.title
+$loop$: $grid-view.templates as $obj
+template-url: $obj.template-url
+licence-url: $obj.licence-url
+github-url: $obj.github-url
+screenshot: $obj.screenshot
+body: $obj.body
+is-last: $obj.is-last
+
+-- end: ftd.column
+
+-- end: ftd.mobile
+
+-- end: ftd.column
+
+-- end: grid-view
+
+
+
+
+
+
+
+
+
+
+-- component grid-of-items:
+caption title: 
+string template-url:
+optional string licence-url:
+string github-url:
+boolean is-last:
+boolean $github-hover: false
+boolean $mit-hover: false
+optional body body:
+optional ftd.image-src screenshot:
+
+-- ftd.column:
+width.fixed.percent if { ftd.device != "mobile" }: 31.58
+width if { ftd.device == "mobile" }: fill-container
+margin-bottom.px: 60
+spacing.fixed.px: 16
+link: $grid-of-items.template-url
+open-in-new-tab: true
+
+-- ftd.image:
+if: { $grid-of-items.screenshot != NULL }
+src: $grid-of-items.screenshot
+width: fill-container
+height: auto
+border-radius.px: 10
+$on-mouse-enter$: $ftd.set-bool($a=$grid-of-items.github-hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a=$grid-of-items.github-hover, v = false)
+
+-- ftd.row:
+align-content: right
+spacing.fixed.px: 12
+padding-top.px: 8
+anchor: parent
+right.px: 16
+bottom.px: 52
+z-index: 99
+
+-- ftd.row:
+
+-- ftd.image:
+if: { grid-of-items.github-url != NULL  }
+src: $assets.files.images.icon-github.svg
+width.fixed.px: 16
+height.fixed.px: 16
+align-self: center
+margin-right.px: 8
+
+-- ftd.image:
+if: { grid-of-items.licence-url != NULL }
+src: $assets.files.images.mit-icon.svg
+width.fixed.px: 16
+height.fixed.px: 16
+align-self: center
+
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- ftd.text: $grid-of-items.title
+role: $inherited.types.label-large
+color: $inherited.colors.text-strong
+width: fill-container
+text-align: center
+
+-- end: ftd.column
+
+-- end: grid-of-items
+
+
+
+
+
+
+
+
+
+
+-- component layout:
+string cta-text: Use this layout
+string cta-url: /
+string previous-url: /
+
+-- ftd.row:
+padding-vertical.px: 20
+padding-horizontal.px: 63
+width: fill-container
+background.solid: $inherited.colors.background.step-1
+margin-vertical.px: 50
+
+-- ftd.row:
+width: fill-container
+spacing.fixed.px: 10
+align-self: center
+
+-- ftd.text: Back
+color: $inherited.colors.text-strong
+role: $inherited.types.button-small
+link: $layout.previous-url
+
+-- ftd.text: |   
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- ftd.text: Distribution Layout
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- end: ftd.row
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+src: $assets.files.static.swap.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.text-format.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.color-fill.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.row:
+background.solid: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout.cta-url
+align-content: center
+width.fixed.px: 236
+border-radius.px: 5
+
+-- ftd.text: $layout.cta-text
+color: $inherited.colors.background.step-1
+role: $inherited.types.button-medium
+white-space: nowrap
+
+-- ftd.image:
+src: $assets.files.static.layout-arrow.svg
+align-self: center
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- end: layout
+
+
+
+
+
+
+
+
+
+
+-- component user:
+common.owner list owners: 
+
+-- ftd.column:
+margin-bottom.px: 30
+spacing.fixed.px: 16
+
+-- user-loop: $obj.title
+profile: $obj.profile
+avatar: $obj.avatar
+$loop$: $user.owners as $obj
+
+-- end: ftd.column
+
+-- end: user
+
+
+
+
+
+
+
+
+-- component user-loop:
+caption title:
+optional string profile:
+optional ftd.image-src avatar:
+
+-- ftd.row:
+spacing.fixed.px: 16
+align-content: center
+
+-- ftd.image: 
+src: $user-loop.avatar
+link: $user-loop.profile
+
+-- ftd.text: $user-loop.title
+link: $user-loop.profile
+role: $common.copy-small
+color: $inherited.colors.text-strong
+white-space: nowrap
+
+-- end: ftd.row
+
+-- end: user-loop
+
+
+
+
+
+
+
+
+
+
+-- component distributive-layout:
+optional caption title: 
+string license-url: 
+string license: 
+string published-date: 
+optional string used-by: 
+optional string likes: 
+common.social-media list social-links: $common.social-links
+
+-- ftd.column:
+width: fill-container
+padding-vertical.rem: 2.25
+padding-horizontal.rem: 3.97
+background.solid: $inherited.colors.background.step-1
+
+-- ftd.text: Distribution Layout
+role: $common.copy-regular
+color: $inherited.colors.accent.primary
+margin-bottom.px: 30
+
+-- ftd.text: Created By:
+role: role: $fonts.copy-small
+color: $inherited.colors.text
+margin-bottom.px: 16
+
+-- user:
+owners: $common.owners
+
+-- ftd.column:
+spacing.fixed.px: 30
+
+-- title-text: License:
+text: $distributive-layout.license
+url: $distributive-layout.license
+
+-- title-text: Date Of Publish:
+text: $distributive-layout.published-date
+
+-- title-text: Used by:
+if: { distributive-layout.used-by != NULL }
+text: $distributive-layout.used-by
+
+-- title-text: likes:
+if: { distributive-layout.likes != NULL }
+text: $distributive-layout.likes
+
+-- end: ftd.column
+
+-- ftd.text: Author connect:
+if: { !ftd.is_empty(distributive-layout.social-links) }
+color: $inherited.colors.text
+role: $common.copy-small
+margin-bottom.px: 16
+margin-top.px: 30
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+$loop$: $distributive-layout.social-links as $obj
+src: $obj.src
+cursor: pointer
+link: $obj.link
+
+-- end: ftd.row
+
+-- end: ftd.column
+
+-- end: distributive-layout
+
+
+
+
+
+
+
+
+
+
+-- component title-text:
+caption title:
+string text:
+optional string url:
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 16
+
+-- ftd.text: $title-text.title
+color: $inherited.colors.text
+role: $common.copy-small
+
+-- ftd.text: $title-text.text
+role: $common.copy-small
+color: $inherited.colors.text-strong
+style: bold
+link if { title-text.url != NULL }: $title-text.url
+
+-- end: ftd.column
+
+-- end: title-text
