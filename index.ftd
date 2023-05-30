@@ -856,7 +856,6 @@ width: fill-container
 
 -- end: ftd.desktop
 
-
 -- ftd.mobile:
 
 -- ftd.text: $grid-view.title
@@ -1008,7 +1007,6 @@ src: $assets.files.images.mit-icon.svg
 width.fixed.px: 16
 height.fixed.px: 16
 align-self: center
-
 
 -- end: ftd.row
 
