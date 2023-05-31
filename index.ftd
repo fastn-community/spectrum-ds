@@ -688,10 +688,15 @@ $on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
 
 -- end: ftd.column
 
+-- ftd.column:
+if: { !doc-page-mobile.distribution-bar }
+width: fill-container
 -- tf.markdown:
 if: {doc-page-mobile.body != NULL}
 
 $doc-page-mobile.body
+
+-- end: ftd.column
 
 -- ftd.column:
 children: $doc-page-mobile.wrapper
@@ -775,9 +780,10 @@ string cta-text: Preview
 width: fill-container
 spacing.fixed.px: 30
 margin-bottom.px: 100
+margin-bottom.px if { ftd.device == "mobile"}: 40
 
 -- ftd.text: $preview-card.title
-if: { preview-card.title != NULL}
+if: { preview-card.title != NULL }
 role: $inherited.types.heading-medium
 
 -- ftd.image:
@@ -1015,6 +1021,14 @@ text-align: center
 -- end: grid-of-items
 
 
+
+
+
+
+
+
+
+
 -- component layout:
 string cta-text: Use this layout
 string cta-url: /
@@ -1043,8 +1057,10 @@ previous-url: $layout.previous-url
 
 -- end: ftd.column
 
-
 -- end: layout
+
+
+
 
 
 
@@ -1129,7 +1145,6 @@ open-in-new-tab: true
 color: $inherited.colors.background.step-1
 role: $inherited.types.button-medium
 white-space: nowrap
-
 
 -- ftd.image:
 src: $assets.files.static.layout-arrow.svg
@@ -1311,7 +1326,7 @@ white-space: nowrap
 
 
 -- component distributors:
-optional caption title: 
+caption title:  Distribution layout
 common.owner list owners:
 string license-url: 
 string license: 
@@ -1321,14 +1336,17 @@ optional string likes:
 common.social-media list social-links: $common.social-links
 
 -- ftd.column:
-width.fixed.percent: 80 
+width: fill-container
+width.fixed.percent if { ftd.device == "mobile" }: 87
 padding-vertical.rem: 2.25
 padding-horizontal.rem: 3.97
-margin-vertical.px: 24
-margin-horizontal.px: 24
+padding-vertical.px if { ftd.device == "mobile" }: 24
+padding-horizontal.px if { ftd.device == "mobile" }: 34
+margin-vertical.px if { ftd.device == "mobile" }: 24
+margin-horizontal.px if { ftd.device == "mobile" }: 24
 background.solid: $inherited.colors.background.step-1
 
--- ftd.text: Distribution layout-desktop
+-- ftd.text: $distributors.title
 role: $common.copy-regular
 color: $inherited.colors.accent.primary
 margin-bottom.px: 30
