@@ -2,6 +2,7 @@
 -- import: fastn/processors as pr
 -- import: fastn-community.github.io/spectrum-ds/common
 -- import: fastn-community.github.io/dark-mode-switcher as dms
+-- import: fastn-community.github.io/inter-typography as typo
 
 
 
@@ -56,13 +57,16 @@ optional pr.toc-item current-section: $common.sitemap.current-section
 optional pr.toc-item current-subsection: $common.sitemap.current-subsection
 optional pr.toc-item current-page: $common.sitemap.current-page
 children wrapper:
-ftd.type-data types: $ftd.default-types
+ftd.type-data types: $typo.types
 ftd.color-scheme colors: $ftd.default-colors
 pr.toc-item list footer-toc: $common.footer-toc
 boolean show-footer: $common.show-footer
 ftd.ui list footer:
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar: false
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -97,6 +101,10 @@ logo-height: $page.logo-height
 logo-width: $page.logo-width
 github-icon: $page.github-icon
 github-url: $page.github-url
+abstract-bar: $page.abstract-bar
+layout-bar: $page.layout-bar
+distribution-bar: $page.distribution-bar
+
 
 -- end: ftd.desktop
 
@@ -120,6 +128,9 @@ logo-height: $page.logo-height
 logo-width: $page.logo-width
 github-icon: $page.github-icon
 github-url: $page.github-url
+abstract-bar: $page.abstract-bar
+layout-bar: $page.layout-bar
+distribution-bar: $page.distribution-bar
 
 -- end: ftd.mobile
 
@@ -166,6 +177,10 @@ optional integer logo-width:
 optional integer logo-height: 
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar:
+
 
 -- ftd.column:
 width: fill-container
@@ -188,6 +203,15 @@ github-icon: $doc-page-desktop.github-icon
 github-url: $doc-page-desktop.github-url
 
 -- ftd.column:
+if: { doc-page-desktop.distribution-bar }
+width: fill-container
+children: $doc-page-desktop.layout-bar
+
+-- end: ftd.column
+
+
+-- ftd.column:
+if: { !doc-page-desktop.distribution-bar }
 max-width.fixed.percent: 63.5
 align-self: center
 margin-top.px: 50
@@ -207,16 +231,33 @@ role: $inherited.types.copy-regular
 color: $inherited.colors.text
 text-align: center
 
+
 -- end: ftd.column
 
 -- ftd.row:
 width: fill-container
 spacing.fixed.px: 32
-align-content if { ftd.is_empty(doc-page-desktop.toc) }: center
+align-content if { ftd.is_empty(doc-page-desktop.toc) && !doc-page-desktop.distribution-bar }: center
+padding-horizontal.px if { doc-page-desktop.distribution-bar }: 53
+margin-top.px if { doc-page-desktop.distribution-bar }: 50
+
+-- ftd.column:
+if: { doc-page-desktop.distribution-bar }
+children: $doc-page-desktop.abstract-bar
+width.fixed.percent: 35
+
+-- end: ftd.column
+
+-- ftd.column:
+width.fixed.percent: 30
+if: { !doc-page-desktop.distribution-bar }
+height.fixed.calc: 100% - 0px
 
 -- render-toc:
 if: { !ftd.is_empty(doc-page-desktop.toc) }
 toc-obj: $doc-page-desktop.toc
+
+-- end: ftd.column
 
 -- ftd.column:
 width: fill-container
@@ -225,10 +266,12 @@ min-height.fixed.calc if { !ftd.is_empty(doc-page-desktop.toc) }: 100vh
 min-height.fixed.calc: 100vh - 135px
 children: $doc-page-desktop.wrapper
 spacing.fixed.em: 0.8
-padding-left.px: 30
-padding-right.px: 48
+padding-left.px if { !doc-page-desktop.distribution-bar }: 30
+padding-right.px if { !doc-page-desktop.distribution-bar }: 48
 
 -- end: ftd.column
+
+
 
 -- end: ftd.row
 
@@ -258,9 +301,9 @@ top.px: 0
 left.px: 24
 min-width.fixed.percent: 20
 min-height.fixed.calc: 100vh - 0px
-height.fixed.vh: 100
+height.fixed.calc: 100% - 0px
 overflow-y: auto
-width.fixed.percent: 30
+width: fill-container
 align-content: top-left
 border-right-width.px: 1
 border-color: $inherited.colors.border
@@ -568,7 +611,7 @@ pr.toc-item list toc:
 pr.toc-item list sections:
 pr.toc-item list sub-sections:
 pr.toc-item list extra:
-ftd.ui list extra-headers:
+ftd.ui list right-sidebar:
 boolean $open-right-sidebar-info: false
 pr.toc-item list footer-toc: 
 optional pr.toc-item current-section:
@@ -580,6 +623,10 @@ optional integer logo-width:
 optional integer logo-height: 
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar: false
+
 
 -- ftd.column:
 width: fill-container
@@ -611,7 +658,15 @@ min-height.fixed.calc: 100vh
 -- ftd.column:
 width: fill-container
 
+-- ftd.column:
+if: { doc-page-mobile.distribution-bar }
+width: fill-container
+children: $doc-page-mobile.layout-bar
+
+-- end: ftd.column
+
 -- ftd.row:
+if: { !doc-page-mobile.distribution-bar }
 width: fill-container
 
 -- tf.h0: $doc-page-mobile.title
@@ -633,11 +688,15 @@ $on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
 
 -- end: ftd.column
 
-
+-- ftd.column:
+if: { !doc-page-mobile.distribution-bar }
+width: fill-container
 -- tf.markdown:
 if: {doc-page-mobile.body != NULL}
 
 $doc-page-mobile.body
+
+-- end: ftd.column
 
 -- ftd.column:
 children: $doc-page-mobile.wrapper
@@ -659,7 +718,6 @@ width: fill-container
 height.fixed.calc: 100% - 0px
 $on-click$: $ftd.set-bool($a = $doc-page-mobile.open-right-sidebar-info, v = false)
 
-
 -- ftd.image:
 src: $assets.files.static.cross-dark.svg
 height.fixed.px: 16
@@ -667,7 +725,6 @@ width: auto
 margin-top.px: 30
 margin-left.px: 16
 $on-click$: $ftd.toggle($a = $doc-page-mobile.open-right-sidebar-info)
-
 
 -- end: ftd.column
 
@@ -683,9 +740,16 @@ top.px: 0
 background.solid: $inherited.colors.background.step-1
 z-index: 1
 padding-horizontal.px: 24
-children: $doc-page-mobile.extra-headers
+children: $doc-page-mobile.right-sidebar
 
 -- end: ftd.column
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { doc-page-mobile.distribution-bar }
+children: $doc-page-mobile.abstract-bar
+width: fill-container
 
 -- end: ftd.column
 
@@ -693,8 +757,679 @@ children: $doc-page-mobile.extra-headers
 if: { !ftd.is_empty(doc-page-mobile.footer-toc) }
 footer-toc: $doc-page-mobile.footer-toc
 
+-- end: ftd.column
+
+-- end: doc-page-mobile
+
+
+
+
+
+
+
+
+
+
+-- component preview-card:
+optional caption title:
+ftd.image-src image:
+string cta-url: /
+string cta-text: Preview
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 30
+margin-bottom.px: 100
+margin-bottom.px if { ftd.device == "mobile"}: 40
+
+-- ftd.text: $preview-card.title
+if: { preview-card.title != NULL }
+role: $inherited.types.heading-medium
+
+-- ftd.image:
+src: $preview-card.image
+width: fill-container
+height: auto
+
+-- ftd.row:
+border-color: $inherited.colors.accent.primary
+border-radius.px: 5
+border-width.px: 1
+padding-vertical.rem: 0.94
+padding-horizontal.rem: 1.25
+width.fixed.percent: 22
+width.fixed.percent if { ftd.device == "mobile" }: 40
+align-content: center
+spacing.fixed.rem: 0.56
+open-in-new-tab: true
+link: $preview-card.cta-url
+
+-- ftd.text: $preview-card.cta-text
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-medium
+
+-- ftd.image:
+src: $assets.files.static.right-arrow.svg
+
+-- end: ftd.row
 
 -- end: ftd.column
 
+-- end: preview-card
 
--- end: doc-page-mobile
+
+
+
+
+
+
+
+
+
+
+-- component grid-view:
+optional caption title:
+common.template list templates:
+optional string more-link: 
+optional string more-link-text: 
+boolean $hover: false
+optional body body:
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.row:
+width: fill-container
+align-content: center
+margin-top.px if { ftd.device == "mobile" }: 24
+
+-- ftd.desktop:
+
+-- ftd.text: $grid-view.title
+if: { grid-view.title != NULL }
+role: $inherited.types.heading-medium
+color: $inherited.colors.accent.primary
+width: fill-container
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.text: $grid-view.title
+if: { grid-view.title != NULL }
+role: $inherited.types.heading-tiny
+color: $inherited.colors.accent.primary
+width: fill-container
+align-self: center
+
+-- end: ftd.mobile
+
+-- ftd.row:
+if: { grid-view.more-link-text != NULL}
+align-content: center
+spacing.fixed.px: 6
+link: $grid-view.more-link
+
+-- ftd.text: $grid-view.more-link-text
+role: $inherited.types.button-medium
+color: $inherited.colors.text-strong
+$on-mouse-enter$: $ftd.set-bool($a=$grid-view.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a=$grid-view.hover, v = false)
+white-space: nowrap
+border-bottom-width.px: 1
+border-color: $inherited.colors.background.step-1
+border-color if { grid-view.hover }: $inherited.colors.cta-primary.base
+color if { grid-view.hover }: $inherited.colors.cta-primary.base
+
+-- ftd.image:
+src: $assets.files.static.arrow.svg
+width: auto
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- ftd.text:
+if: { grid-view.body != NULL }
+role: $inherited.types.copy-regular
+color: $inherited.colors.text
+margin-top.px: 16
+margin-bottom.px if { ftd.device == "mobile"} : 36
+
+$grid-view.body
+
+-- ftd.desktop:
+
+-- ftd.row:
+width: fill-container
+wrap: true
+spacing.fixed.px: 13
+margin-top.px if { grid-view.more-link-text != NULL }: 60
+margin-top.px if { grid-view.more-link-text == NULL }: 30
+margin-bottom.px: 40
+
+-- grid-of-items: $obj.title
+$loop$: $grid-view.templates as $obj
+template-url: $obj.template-url
+licence-url: $obj.licence-url
+github-url: $obj.github-url
+screenshot: $obj.screenshot
+body: $obj.body
+is-last: $obj.is-last
+
+-- end: ftd.row
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width.fixed.percent: 100
+
+-- grid-of-items: $obj.title
+$loop$: $grid-view.templates as $obj
+template-url: $obj.template-url
+licence-url: $obj.licence-url
+github-url: $obj.github-url
+screenshot: $obj.screenshot
+body: $obj.body
+is-last: $obj.is-last
+
+-- end: ftd.column
+
+-- end: ftd.mobile
+
+-- end: ftd.column
+
+-- end: grid-view
+
+
+
+
+
+
+
+
+
+
+-- component grid-of-items:
+caption title: 
+string template-url:
+optional string licence-url:
+string github-url:
+boolean is-last:
+boolean $github-hover: false
+boolean $mit-hover: false
+optional body body:
+optional ftd.image-src screenshot:
+
+-- ftd.column:
+width.fixed.percent if { ftd.device != "mobile" }: 31.58
+width if { ftd.device == "mobile" }: fill-container
+margin-bottom.px: 60
+spacing.fixed.px: 16
+link: $grid-of-items.template-url
+open-in-new-tab: true
+
+-- ftd.image:
+if: { $grid-of-items.screenshot != NULL }
+src: $grid-of-items.screenshot
+width: fill-container
+height: auto
+border-radius.px: 10
+$on-mouse-enter$: $ftd.set-bool($a=$grid-of-items.github-hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a=$grid-of-items.github-hover, v = false)
+
+-- ftd.row:
+align-content: right
+spacing.fixed.px: 12
+padding-top.px: 8
+anchor: parent
+right.px: 16
+bottom.px: 52
+z-index: 99
+
+-- ftd.row:
+
+-- ftd.image:
+if: { grid-of-items.github-url != NULL  }
+src: $assets.files.static.icon-github.svg
+width.fixed.px: 16
+height.fixed.px: 16
+align-self: center
+margin-right.px: 8
+
+-- ftd.image:
+if: { grid-of-items.licence-url != NULL }
+src: $assets.files.static.mit-icon.svg
+width.fixed.px: 16
+height.fixed.px: 16
+align-self: center
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- ftd.text: $grid-of-items.title
+role: $inherited.types.label-large
+color: $inherited.colors.text-strong
+width: fill-container
+text-align: center
+
+-- end: ftd.column
+
+-- end: grid-of-items
+
+
+
+
+
+
+
+
+
+
+-- component layout:
+string cta-text: Use this layout
+string cta-url: /
+string previous-url: /
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.desktop:
+
+-- layout-desktop:
+cta-text: $layout.cta-text
+cta-url: $layout.cta-url
+previous-url: $layout.previous-url
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- layout-mobile:
+cta-text: $layout.cta-text
+cta-url: $layout.cta-url
+previous-url: $layout.previous-url
+
+-- end: ftd.mobile
+
+-- end: ftd.column
+
+-- end: layout
+
+
+
+
+
+
+
+
+
+
+-- component layout-desktop:
+string cta-text: 
+string cta-url: 
+string previous-url: 
+
+-- ftd.row:
+padding-vertical.px: 20
+padding-horizontal.px: 63
+width: fill-container
+background.solid: $inherited.colors.background.step-1
+margin-vertical.px: 50
+
+-- ftd.row:
+width: fill-container
+spacing.fixed.px: 10
+align-self: center
+
+-- ftd.text: Back
+color: $inherited.colors.text-strong
+role: $inherited.types.button-small
+link: $layout-desktop.previous-url
+
+-- ftd.text: |   
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- ftd.text: Distribution layout-desktop
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- end: ftd.row
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+src: $assets.files.static.swap.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.text-format.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.color-fill.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.row:
+background.solid: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout-desktop.cta-url
+align-content: center
+width.fixed.px: 236
+border-radius.px: 5
+open-in-new-tab: true
+
+-- ftd.text: $layout-desktop.cta-text
+color: $inherited.colors.background.step-1
+role: $inherited.types.button-medium
+white-space: nowrap
+
+-- ftd.image:
+src: $assets.files.static.layout-arrow.svg
+align-self: center
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- end: ftd.row
+
+-- end: layout-desktop
+
+
+
+
+
+
+
+
+
+
+-- component layout-mobile:
+string cta-text:
+string cta-url: 
+string previous-url: 
+
+-- ftd.column:
+padding-vertical.px: 24
+padding-horizontal.px: 24
+width: fill-container
+background.solid: $inherited.colors.background.step-1
+margin-vertical.px: 50
+spacing.fixed.px: 64
+align-content: center
+
+-- ftd.row:
+width: fill-container
+spacing.fixed.px: 10
+align-content: center
+
+-- ftd.text: Back
+color: $inherited.colors.text-strong
+role: $inherited.types.button-small
+link: $layout-mobile.previous-url
+
+-- ftd.text: |   
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- ftd.text: Distribution layout-mobile
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- end: ftd.row
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+src: $assets.files.static.swap.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.text-format.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.color-fill.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- end: ftd.row
+
+-- ftd.row:
+background.solid: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout-mobile.cta-url
+align-content: center
+width.fixed.px: 236
+border-radius.px: 5
+open-in-new-tab: true
+
+-- ftd.text: $layout-mobile.cta-text
+color: $inherited.colors.background.step-1
+role: $inherited.types.button-medium
+white-space: nowrap
+
+-- ftd.image:
+src: $assets.files.static.layout-arrow.svg
+align-self: center
+
+-- end: ftd.row
+
+-- end: ftd.column
+
+-- end: layout-mobile
+
+
+
+
+
+
+
+
+
+
+-- component user:
+common.owner list owners: 
+
+-- ftd.column:
+margin-bottom.px: 30
+spacing.fixed.px: 16
+
+-- user-loop: $obj.title
+profile: $obj.profile
+avatar: $obj.avatar
+$loop$: $user.owners as $obj
+
+-- end: ftd.column
+
+-- end: user
+
+
+
+
+
+
+
+
+
+
+-- component user-loop:
+caption title:
+optional string profile:
+optional ftd.image-src avatar:
+
+-- ftd.row:
+spacing.fixed.px: 16
+align-content: center
+open-in-new-tab: true
+link: $user-loop.profile
+
+-- ftd.image: 
+src: $user-loop.avatar
+
+-- ftd.text: $user-loop.title
+role: $common.copy-small
+color: $inherited.colors.text-strong
+white-space: nowrap
+
+-- end: ftd.row
+
+-- end: user-loop
+
+
+
+
+
+
+
+
+
+
+-- component distributors:
+caption title:  Distribution layout
+common.owner list owners:
+string license-url: 
+string license: 
+string published-date: 
+optional string used-by: 
+optional string likes: 
+common.social-media list connect: $common.social-link
+
+-- ftd.column:
+width: fill-container
+width.fixed.percent if { ftd.device == "mobile" }: 87
+padding-vertical.rem: 2.25
+padding-horizontal.rem: 3.97
+padding-vertical.px if { ftd.device == "mobile" }: 24
+padding-horizontal.px if { ftd.device == "mobile" }: 34
+margin-vertical.px if { ftd.device == "mobile" }: 24
+margin-horizontal.px if { ftd.device == "mobile" }: 24
+background.solid: $inherited.colors.background.step-1
+
+-- ftd.text: $distributors.title
+role: $inherited.types.heading-tiny
+color: $inherited.colors.accent.primary
+margin-bottom.px: 30
+
+-- ftd.text: Created By:
+role: $common.copy-small
+color: $inherited.colors.text
+margin-bottom.px: 16
+
+-- user:
+owners: $distributors.owners
+
+-- ftd.column:
+spacing.fixed.px: 30
+
+-- title-text: License:
+text: $distributors.license
+url: $distributors.license
+
+-- title-text: Date Of Publish:
+text: $distributors.published-date
+
+-- title-text: Used by:
+if: { distributors.used-by != NULL }
+text: $distributors.used-by
+
+-- title-text: Likes:
+if: { distributors.likes != NULL }
+text: $distributors.likes
+
+-- end: ftd.column
+
+-- ftd.text: Author connect:
+if: { !ftd.is_empty(distributors.connect) }
+color: $inherited.colors.text
+role: $common.copy-small
+margin-bottom.px: 16
+margin-top.px: 30
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+$loop$: $distributors.connect as $obj
+src: $obj.src
+cursor: pointer
+link: $obj.link
+open-in-new-tab: true
+
+-- end: ftd.row
+
+-- end: ftd.column
+
+-- end: distributors
+
+
+
+
+
+
+
+
+
+
+-- component title-text:
+caption title:
+string text:
+optional string url:
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 16
+
+-- ftd.text: $title-text.title
+color: $inherited.colors.text
+role: $common.copy-small
+
+-- ftd.text: $title-text.text
+role: $common.copy-small
+color: $inherited.colors.text-strong
+style: bold
+link if { title-text.url != NULL }: $title-text.url
+
+-- end: ftd.column
+
+-- end: title-text
