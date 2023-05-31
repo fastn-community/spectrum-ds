@@ -993,7 +993,7 @@ z-index: 99
 
 -- ftd.image:
 if: { grid-of-items.github-url != NULL  }
-src: $assets.files.images.icon-github.svg
+src: $assets.files.static.icon-github.svg
 width.fixed.px: 16
 height.fixed.px: 16
 align-self: center
@@ -1001,7 +1001,7 @@ margin-right.px: 8
 
 -- ftd.image:
 if: { grid-of-items.licence-url != NULL }
-src: $assets.files.images.mit-icon.svg
+src: $assets.files.static.mit-icon.svg
 width.fixed.px: 16
 height.fixed.px: 16
 align-self: center
