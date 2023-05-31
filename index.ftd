@@ -1347,12 +1347,12 @@ margin-horizontal.px if { ftd.device == "mobile" }: 24
 background.solid: $inherited.colors.background.step-1
 
 -- ftd.text: $distributors.title
-role: $common.copy-regular
+role: $inherited.types.heading-tiny
 color: $inherited.colors.accent.primary
 margin-bottom.px: 30
 
 -- ftd.text: Created By:
-role: role: $fonts.copy-small
+role: $common.copy-small
 color: $inherited.colors.text
 margin-bottom.px: 16
 
@@ -1373,7 +1373,7 @@ text: $distributors.published-date
 if: { distributors.used-by != NULL }
 text: $distributors.used-by
 
--- title-text: likes:
+-- title-text: Likes:
 if: { distributors.likes != NULL }
 text: $distributors.likes
 
