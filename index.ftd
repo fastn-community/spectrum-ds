@@ -1333,7 +1333,7 @@ string license:
 string published-date: 
 optional string used-by: 
 optional string likes: 
-common.social-media list social-links: $common.social-links
+common.social-media list connect: $common.social-link
 
 -- ftd.column:
 width: fill-container
@@ -1380,7 +1380,7 @@ text: $distributors.likes
 -- end: ftd.column
 
 -- ftd.text: Author connect:
-if: { !ftd.is_empty(distributors.social-links) }
+if: { !ftd.is_empty(distributors.connect) }
 color: $inherited.colors.text
 role: $common.copy-small
 margin-bottom.px: 16
@@ -1390,7 +1390,7 @@ margin-top.px: 30
 spacing.fixed.px: 24
 
 -- ftd.image:
-$loop$: $distributors.social-links as $obj
+$loop$: $distributors.connect as $obj
 src: $obj.src
 cursor: pointer
 link: $obj.link

@@ -197,6 +197,8 @@ packages.
 ftd.image-src src:
 string link: /
 
+-- social-media list social-link:
+
 -- social-media list social-links:
 
 -- social-media:
