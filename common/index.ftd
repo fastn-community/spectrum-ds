@@ -62,6 +62,137 @@ screenshot: $assets.files.static.doc-site.jpg
 
 
 
+-- template list schemes:
+
+-- template: Winter CS
+template-url: https://fastn-community.github.io/winter-cs/
+screenshot: $assets.files.static.cs.winter-cs.png
+licence-url: https://github.com/fastn-community/winter-cs/blob/main/LICENSE
+github-url: https://github.com/fastn-community/winter-cs
+
+Add warmth and energy to your designs with the `winter-cs`.
+
+-- template: Dark Flame CS
+template-url: https://fastn-community.github.io/dark-flame-cs/
+screenshot: $assets.files.static.cs.dark-flame-cs.png
+licence-url: https://github.com/fastn-community/dark-flame-cs/blob/main/LICENSE
+github-url: https://github.com/fastn-community/dark-flame-cs/
+
+Add warmth and energy to your designs with the `dark-flame-cs`.
+
+
+-- template: Saturated Sunset CS
+template-url: https://fastn-community.github.io/saturated-sunset-cs/
+screenshot: $assets.files.static.cs.saturated-sunset-cs.png
+licence-url: https://github.com/fastn-community/saturated-sunset-cs/blob/main/LICENSE
+github-url: https://github.com/fastn-community/saturated-sunset-cs
+
+Add warmth and energy to your designs with the `saturated-sunset-cs`.
+
+
+-- template: Forest CS
+template-url: https://fastn-community.github.io/forest-cs/
+screenshot: $assets.files.static.cs.forest-cs.png
+licence-url: https://github.com/fastn-community/forest-cs/blob/main/LICENSE
+github-url: https://github.com/fastn-community/forest-cs
+
+Add warmth and energy to your designs with the `forest-cs`.
+
+-- end: schemes
+
+
+
+
+
+
+
+
+
+
+-- template list bling:
+
+-- template: Bling
+template-url: https://fifthtry.github.io/bling/
+screenshot: $assets.files.static.bling-components.png
+licence-url: https://github.com/FifthTry/bling/blob/main/LICENSE
+github-url: https://github.com/FifthTry/bling/
+
+`fifthtry.github.io/bling` is develoed and designed with various components which 
+can be used inside `ftd` web packages.
+
+-- end: bling
+
+
+
+
+
+
+
+
+
+
+-- template list fonts:
+
+-- template: Inter Typography
+template-url: https://fastn-community.github.io/inter-typography/
+licence-url: https://github.com/fastn-community/inter-typography/blob/main/LICENSE.md
+github-url: https://github.com/fastn-community/inter-typography
+screenshot: $assets.files.static.font.inter-font.jpg
+
+`inter-font` typography is available and can be used inside `fastn` web
+packages.
+
+-- template: Lato Typography
+template-url: https://fastn-community.github.io/lato-typography/
+licence-url: https://github.com/fastn-community/lato-typography/blob/main/LICENSE.md
+github-url: https://github.com/fastn-community/lato-typography
+screenshot: $assets.files.static.font.lato-font.jpg
+
+`lato-font` typography is available and can be used inside `fastn` web
+packages.
+
+-- template: Opensans Typography
+template-url: https://fastn-community.github.io/opensans-typography/
+licence-url: https://github.com/fastn-community/opensans-typography/blob/main/LICENSE.md
+github-url: https://github.com/fastn-community/opensans-typography
+screenshot: $assets.files.static.font.opensans-font.jpg
+
+`opensans-font` typography is available and can be used inside `fastn` web
+packages.
+
+
+-- template: Roboto Typography
+template-url: https://fastn-community.github.io/roboto-typography/
+licence-url: https://github.com/fastn-community/roboto-typography/blob/main/LICENSE.md
+github-url: https://github.com/fastn-community/roboto-typography
+screenshot: $assets.files.static.font.roboto-font.jpg
+
+`roboto-font` typography is available and can be used inside `fastn` web
+packages.
+
+-- template: Roboto Mono Typography
+template-url: https://fastn-community.github.io/roboto-mono-typography/
+licence-url: https://github.com/fastn-community/roboto-mono-typography/blob/main/LICENSE.md
+github-url: https://github.com/fastn-community/roboto-mono-typography
+screenshot: $assets.files.static.font.roboto-mono-font.jpg
+
+`roboto-mono-font` typography is available and can be used inside `fastn` web
+packages.
+
+-- end: fonts
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- record social-media:
 ftd.image-src src:
 string link: /
