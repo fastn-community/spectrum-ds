@@ -128,6 +128,9 @@ logo-height: $page.logo-height
 logo-width: $page.logo-width
 github-icon: $page.github-icon
 github-url: $page.github-url
+abstract-bar: $page.abstract-bar
+layout-bar: $page.layout-bar
+distribution-bar: $page.distribution-bar
 
 -- end: ftd.mobile
 
@@ -620,6 +623,10 @@ optional integer logo-width:
 optional integer logo-height: 
 boolean github-icon: false
 optional string github-url: 
+ftd.ui list abstract-bar:
+ftd.ui list layout-bar:
+boolean distribution-bar: false
+
 
 -- ftd.column:
 width: fill-container
@@ -651,7 +658,15 @@ min-height.fixed.calc: 100vh
 -- ftd.column:
 width: fill-container
 
+-- ftd.column:
+if: { doc-page-mobile.distribution-bar }
+width: fill-container
+children: $doc-page-mobile.layout-bar
+
+-- end: ftd.column
+
 -- ftd.row:
+if: { !doc-page-mobile.distribution-bar }
 width: fill-container
 
 -- tf.h0: $doc-page-mobile.title
@@ -723,6 +738,13 @@ padding-horizontal.px: 24
 children: $doc-page-mobile.right-sidebar
 
 -- end: ftd.column
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { doc-page-mobile.distribution-bar }
+children: $doc-page-mobile.abstract-bar
+width: fill-container
 
 -- end: ftd.column
 
@@ -829,8 +851,8 @@ width: fill-container
 
 -- ftd.text: $grid-view.title
 if: { grid-view.title != NULL }
-role: $inherited.types.copy-large
-color: $inherited.colors.text
+role: $inherited.types.heading-tiny
+color: $inherited.colors.accent.primary
 width: fill-container
 align-self: center
 
@@ -866,6 +888,7 @@ if: { grid-view.body != NULL }
 role: $inherited.types.copy-regular
 color: $inherited.colors.text
 margin-top.px: 16
+margin-bottom.px if { ftd.device == "mobile"} : 36
 
 $grid-view.body
 
@@ -992,18 +1015,47 @@ text-align: center
 -- end: grid-of-items
 
 
-
-
-
-
-
-
-
-
 -- component layout:
 string cta-text: Use this layout
 string cta-url: /
 string previous-url: /
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.desktop:
+
+-- layout-desktop:
+cta-text: $layout.cta-text
+cta-url: $layout.cta-url
+previous-url: $layout.previous-url
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- layout-mobile:
+cta-text: $layout.cta-text
+cta-url: $layout.cta-url
+previous-url: $layout.previous-url
+
+-- end: ftd.mobile
+
+-- end: ftd.column
+
+
+-- end: layout
+
+
+
+
+
+
+
+-- component layout-desktop:
+string cta-text: 
+string cta-url: 
+string previous-url: 
 
 -- ftd.row:
 padding-vertical.px: 20
@@ -1020,13 +1072,13 @@ align-self: center
 -- ftd.text: Back
 color: $inherited.colors.text-strong
 role: $inherited.types.button-small
-link: $layout.previous-url
+link: $layout-desktop.previous-url
 
 -- ftd.text: |   
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
--- ftd.text: Distribution Layout
+-- ftd.text: Distribution layout-desktop
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
@@ -1067,16 +1119,17 @@ background.solid: $inherited.colors.accent.primary
 padding-vertical.px: 15
 padding-horizontal.px: 15
 spacing.fixed.px: 9
-link: $layout.cta-url
+link: $layout-desktop.cta-url
 align-content: center
 width.fixed.px: 236
 border-radius.px: 5
 open-in-new-tab: true
 
--- ftd.text: $layout.cta-text
+-- ftd.text: $layout-desktop.cta-text
 color: $inherited.colors.background.step-1
 role: $inherited.types.button-medium
 white-space: nowrap
+
 
 -- ftd.image:
 src: $assets.files.static.layout-arrow.svg
@@ -1088,7 +1141,108 @@ align-self: center
 
 -- end: ftd.row
 
--- end: layout
+-- end: layout-desktop
+
+
+
+
+
+
+
+
+
+
+-- component layout-mobile:
+string cta-text:
+string cta-url: 
+string previous-url: 
+
+-- ftd.column:
+padding-vertical.px: 24
+padding-horizontal.px: 24
+width: fill-container
+background.solid: $inherited.colors.background.step-1
+margin-vertical.px: 50
+spacing.fixed.px: 64
+align-content: center
+
+-- ftd.row:
+width: fill-container
+spacing.fixed.px: 10
+align-content: center
+
+-- ftd.text: Back
+color: $inherited.colors.text-strong
+role: $inherited.types.button-small
+link: $layout-mobile.previous-url
+
+-- ftd.text: |   
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- ftd.text: Distribution layout-mobile
+color: $inherited.colors.accent.primary
+role: $inherited.types.button-small
+
+-- end: ftd.row
+
+-- ftd.row:
+spacing.fixed.px: 24
+
+-- ftd.image:
+src: $assets.files.static.swap.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.text-format.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- ftd.image:
+src: $assets.files.static.color-fill.svg
+align-self: center
+border-radius.px: 5
+border-color: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 17
+border-width.px: 1
+
+-- end: ftd.row
+
+-- ftd.row:
+background.solid: $inherited.colors.accent.primary
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout-mobile.cta-url
+align-content: center
+width.fixed.px: 236
+border-radius.px: 5
+open-in-new-tab: true
+
+-- ftd.text: $layout-mobile.cta-text
+color: $inherited.colors.background.step-1
+role: $inherited.types.button-medium
+white-space: nowrap
+
+-- ftd.image:
+src: $assets.files.static.layout-arrow.svg
+align-self: center
+
+-- end: ftd.row
+
+-- end: ftd.column
+
+-- end: layout-mobile
 
 
 
@@ -1167,12 +1321,14 @@ optional string likes:
 common.social-media list social-links: $common.social-links
 
 -- ftd.column:
-width: fill-container
+width.fixed.percent: 80 
 padding-vertical.rem: 2.25
 padding-horizontal.rem: 3.97
+margin-vertical.px: 24
+margin-horizontal.px: 24
 background.solid: $inherited.colors.background.step-1
 
--- ftd.text: Distribution Layout
+-- ftd.text: Distribution layout-desktop
 role: $common.copy-regular
 color: $inherited.colors.accent.primary
 margin-bottom.px: 30
