@@ -311,7 +311,7 @@ padding-left.px: 24
 padding-right.px: 16
 padding-bottom.px: 32
 margin-bottom.px: 25
-spacing.fixed.rem: 1.5
+spacing.fixed.rem: 2
 
 -- ftd.row:
 spacing.fixed.px: 18
@@ -391,7 +391,7 @@ margin-left.px: 12
 padding-left.px: 10
 margin-top.rem: 0.8
 padding-top.rem: 0.8
-margin-bottom.rem: 0.8
+margin-bottom.rem: 0.2
 spacing.fixed.rem: 2
 if: { !ftd.is_empty(toc-instance.toc.children)}
 
