@@ -311,7 +311,7 @@ padding-left.px: 24
 padding-right.px: 16
 padding-bottom.px: 32
 margin-bottom.px: 25
-spacing.fixed.rem: 0.82
+spacing.fixed.rem: 1.5
 
 -- ftd.row:
 spacing.fixed.px: 18
@@ -354,7 +354,7 @@ width: fill-container
 -- ftd.row:
 width: fill-container
 spacing.fixed.px: 24
-$on-click$: $ftd.toggle($a = $toc-instance.toc-clone.is-open)
+;;$on-click$: $ftd.toggle($a = $toc-instance.toc-clone.is-open)
 
 -- ftd.image:
 if: { toc-instance.toc.font-icon != NULL }
@@ -370,14 +370,14 @@ color: $inherited.colors.text-strong
 color if { toc-instance.toc.is-active }: $inherited.colors.cta-primary.base
 width: fill-container
 
--- ftd.image:
+/-- ftd.image:
 if: { !ftd.is_empty(toc-instance.toc.children) && toc-instance.toc-clone.is-open}
 src: $assets.files.static.open.svg
 height.fixed.px: 24
 width: auto
 align-self: center
 
--- ftd.image:
+/-- ftd.image:
 if: { !ftd.is_empty(toc-instance.toc.children) && !toc-instance.toc-clone.is-open}
 src: $assets.files.static.close.svg
 height.fixed.px: 24
@@ -389,11 +389,11 @@ align-self: center
 -- ftd.column:
 margin-left.px: 12
 padding-left.px: 10
-margin-top.rem: 0.5
-padding-top.rem: 0
-margin-bottom.rem: 1.25
-spacing.fixed.rem: 1
-if: { !ftd.is_empty(toc-instance.toc.children) && toc-instance.toc-clone.is-open }
+margin-top.rem: 0.8
+padding-top.rem: 0.8
+margin-bottom.rem: 0.8
+spacing.fixed.rem: 2
+if: { !ftd.is_empty(toc-instance.toc.children)}
 
 -- childrens:
 $loop$: $toc-instance.toc.children as $obj
@@ -418,6 +418,7 @@ toc: $obj
 pr.toc-item toc:
 
 -- ftd.column:
+spacing.fixed.rem: 0
 
 -- ftd.row:
 width: fill-container
