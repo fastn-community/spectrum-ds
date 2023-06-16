@@ -67,6 +67,7 @@ optional string github-url:
 ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar: false
+boolean full-width: false
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -104,7 +105,7 @@ github-url: $page.github-url
 abstract-bar: $page.abstract-bar
 layout-bar: $page.layout-bar
 distribution-bar: $page.distribution-bar
-
+full-width: $page.full-width
 
 -- end: ftd.desktop
 
@@ -180,6 +181,7 @@ optional string github-url:
 ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar:
+boolean full-width: false
 
 
 -- ftd.column:
@@ -211,7 +213,7 @@ children: $doc-page-desktop.layout-bar
 
 
 -- ftd.column:
-if: { !doc-page-desktop.distribution-bar }
+if: { !doc-page-desktop.distribution-bar && !doc-page-desktop.full-width }
 max-width.fixed.percent: 63.5
 align-self: center
 margin-top.px: 50
@@ -234,6 +236,29 @@ text-align: center
 
 -- end: ftd.column
 
+-- ftd.column:
+if: { !doc-page-desktop.distribution-bar && doc-page-desktop.full-width }
+width: fill-container
+align-self: center
+margin-top.px: 50
+margin-bottom.px: 50
+align-content: center
+spacing.fixed.px: 16
+
+-- ftd.text: $doc-page-desktop.title
+if: { doc-page-desktop.title != NULL }
+role: $inherited.types.heading-large
+color: $inherited.colors.text-strong
+
+-- ftd.text: 
+if: { doc-page-desktop.body != NULL }
+text: $doc-page-desktop.body
+role: $inherited.types.copy-regular
+color: $inherited.colors.text
+text-align: center
+
+-- end: ftd.column
+
 -- ftd.row:
 width: fill-container
 spacing.fixed.px: 32
@@ -250,7 +275,7 @@ width.fixed.percent: 35
 
 -- ftd.column:
 width.fixed.percent: 30
-if: { !doc-page-desktop.distribution-bar }
+if: { !doc-page-desktop.distribution-bar && !doc-page-desktop.full-width }
 height.fixed.calc: 100% - 0px
 
 -- render-toc:
@@ -270,8 +295,6 @@ padding-left.px if { !doc-page-desktop.distribution-bar }: 30
 padding-right.px if { !doc-page-desktop.distribution-bar }: 48
 
 -- end: ftd.column
-
-
 
 -- end: ftd.row
 
@@ -628,7 +651,6 @@ ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar: false
 
-
 -- ftd.column:
 width: fill-container
 background.solid:$inherited.colors.background.base
@@ -663,6 +685,13 @@ width: fill-container
 if: { doc-page-mobile.distribution-bar }
 width: fill-container
 children: $doc-page-mobile.layout-bar
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { doc-page-mobile.distribution-bar }
+children: $doc-page-mobile.abstract-bar
+width: fill-container
 
 -- end: ftd.column
 
@@ -747,13 +776,6 @@ children: $doc-page-mobile.right-sidebar
 
 -- end: ftd.column
 
--- ftd.column:
-if: { doc-page-mobile.distribution-bar }
-children: $doc-page-mobile.abstract-bar
-width: fill-container
-
--- end: ftd.column
-
 -- footer:
 if: { !ftd.is_empty(doc-page-mobile.footer-toc) }
 footer-toc: $doc-page-mobile.footer-toc
@@ -776,6 +798,7 @@ optional caption title:
 ftd.image-src image:
 string cta-url: /
 string cta-text: Preview
+boolean $hover: false
 
 -- ftd.column:
 width: fill-container
@@ -786,6 +809,7 @@ margin-bottom.px if { ftd.device == "mobile"}: 40
 -- ftd.text: $preview-card.title
 if: { preview-card.title != NULL }
 role: $inherited.types.heading-medium
+color: $inherited.colors.text
 
 -- ftd.image:
 src: $preview-card.image
@@ -793,7 +817,7 @@ width: fill-container
 height: auto
 
 -- ftd.row:
-border-color: $inherited.colors.accent.primary
+border-color: #2DD4BF
 border-radius.px: 5
 border-width.px: 1
 padding-vertical.rem: 0.94
@@ -804,13 +828,24 @@ align-content: center
 spacing.fixed.rem: 0.56
 open-in-new-tab: true
 link: $preview-card.cta-url
+$on-mouse-enter$: $ftd.set-bool($a = $preview-card.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a = $preview-card.hover, v = false)
+background.solid if { preview-card.hover }: $inherited.colors.accent.primary
+border-color if { preview-card.hover }: $inherited.colors.accent.primary
+align-self if { ftd.device == "mobile" }: center
 
 -- ftd.text: $preview-card.cta-text
-color: $inherited.colors.accent.primary
+color: #2DD4BF
+color if { preview-card.hover }: #FFFFFF
 role: $inherited.types.button-medium
 
 -- ftd.image:
+if: { !preview-card.hover }
 src: $assets.files.static.right-arrow.svg
+
+-- ftd.image:
+if: { preview-card.hover }
+src: $assets.files.static.right-arrow-hover.svg
 
 -- end: ftd.row
 
@@ -1031,6 +1066,7 @@ text-align: center
 
 
 -- component layout:
+optional caption title: 
 string cta-text: Use this layout
 string cta-url: /
 string previous-url: /
@@ -1040,7 +1076,7 @@ width: fill-container
 
 -- ftd.desktop:
 
--- layout-desktop:
+-- layout-desktop: $layout.title
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
 previous-url: $layout.previous-url
@@ -1049,7 +1085,7 @@ previous-url: $layout.previous-url
 
 -- ftd.mobile:
 
--- layout-mobile:
+-- layout-mobile: $layout.title
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
 previous-url: $layout.previous-url
@@ -1071,8 +1107,11 @@ previous-url: $layout.previous-url
 
 -- component layout-desktop:
 string cta-text: 
+optional caption title:
 string cta-url: 
 string previous-url: 
+boolean show-filter: false
+boolean $hover: false
 
 -- ftd.row:
 padding-vertical.px: 20
@@ -1092,10 +1131,12 @@ role: $inherited.types.button-small
 link: $layout-desktop.previous-url
 
 -- ftd.text: |   
+if: { layout-desktop.title != NULL }
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
--- ftd.text: Distribution layout-desktop
+-- ftd.text: $layout-desktop.title
+if: { layout-desktop.title != NULL }
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
@@ -1105,6 +1146,7 @@ role: $inherited.types.button-small
 spacing.fixed.px: 24
 
 -- ftd.image:
+if: { layout-desktop.show-filter }
 src: $assets.files.static.swap.svg
 align-self: center
 border-radius.px: 5
@@ -1114,6 +1156,7 @@ padding-horizontal.px: 17
 border-width.px: 1
 
 -- ftd.image:
+if: { layout-desktop.show-filter }
 src: $assets.files.static.text-format.svg
 align-self: center
 border-radius.px: 5
@@ -1123,6 +1166,7 @@ padding-horizontal.px: 17
 border-width.px: 1
 
 -- ftd.image:
+if: { layout-desktop.show-filter }
 src: $assets.files.static.color-fill.svg
 align-self: center
 border-radius.px: 5
@@ -1132,24 +1176,33 @@ padding-horizontal.px: 17
 border-width.px: 1
 
 -- ftd.row:
-background.solid: $inherited.colors.accent.primary
 padding-vertical.px: 15
 padding-horizontal.px: 15
 spacing.fixed.px: 9
 link: $layout-desktop.cta-url
 align-content: center
 width.fixed.px: 236
-border-radius.px: 5
 open-in-new-tab: true
+$on-mouse-enter$: $ftd.set-bool($a = $layout-desktop.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a = $layout-desktop.hover, v = false)
+background.solid if { layout-desktop.hover }: $inherited.colors.accent.primary
+border-color if { layout-desktop.hover }: $inherited.colors.accent.primary
+border-color: #2DD4BF
+border-radius.px: 5
+border-width.px: 1
 
 -- ftd.text: $layout-desktop.cta-text
-color: $inherited.colors.background.step-1
+color: #2DD4BF
+color if { layout-desktop.hover }: #FFFFFF
 role: $inherited.types.button-medium
-white-space: nowrap
 
 -- ftd.image:
-src: $assets.files.static.layout-arrow.svg
-align-self: center
+if: { !layout-desktop.hover }
+src: $assets.files.static.right-arrow.svg
+
+-- ftd.image:
+if: { layout-desktop.hover }
+src: $assets.files.static.right-arrow-hover.svg
 
 -- end: ftd.row
 
@@ -1172,6 +1225,9 @@ align-self: center
 string cta-text:
 string cta-url: 
 string previous-url: 
+boolean show-filter: false
+boolean $hover: false
+optional caption title:
 
 -- ftd.column:
 padding-vertical.px: 24
@@ -1193,16 +1249,19 @@ role: $inherited.types.button-small
 link: $layout-mobile.previous-url
 
 -- ftd.text: |   
+if: { layout-mobile.title != NULL }
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
--- ftd.text: Distribution layout-mobile
+-- ftd.text: $layout-mobile.title
+if: { layout-mobile.title != NULL }
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
 -- end: ftd.row
 
 -- ftd.row:
+if: { layout-mobile.show-filter }
 spacing.fixed.px: 24
 
 -- ftd.image:
@@ -1235,24 +1294,33 @@ border-width.px: 1
 -- end: ftd.row
 
 -- ftd.row:
-background.solid: $inherited.colors.accent.primary
 padding-vertical.px: 15
 padding-horizontal.px: 15
 spacing.fixed.px: 9
 link: $layout-mobile.cta-url
 align-content: center
 width.fixed.px: 236
-border-radius.px: 5
 open-in-new-tab: true
+$on-mouse-enter$: $ftd.set-bool($a = $layout-mobile.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a = $layout-mobile.hover, v = false)
+background.solid if { layout-mobile.hover }: $inherited.colors.accent.primary
+border-color if { layout-mobile.hover }: $inherited.colors.accent.primary
+border-color: #2DD4BF
+border-radius.px: 5
+border-width.px: 1
 
 -- ftd.text: $layout-mobile.cta-text
-color: $inherited.colors.background.step-1
+color: #2DD4BF
+color if { layout-mobile.hover }: #FFFFFF
 role: $inherited.types.button-medium
-white-space: nowrap
 
 -- ftd.image:
-src: $assets.files.static.layout-arrow.svg
-align-self: center
+if: { !layout-mobile.hover }
+src: $assets.files.static.right-arrow.svg
+
+-- ftd.image:
+if: { layout-mobile.hover }
+src: $assets.files.static.right-arrow-hover.svg
 
 -- end: ftd.row
 
@@ -1338,13 +1406,10 @@ common.social-media list connect: $common.social-link
 
 -- ftd.column:
 width: fill-container
-width.fixed.percent if { ftd.device == "mobile" }: 87
 padding-vertical.rem: 2.25
 padding-horizontal.rem: 3.97
 padding-vertical.px if { ftd.device == "mobile" }: 24
-padding-horizontal.px if { ftd.device == "mobile" }: 34
-margin-vertical.px if { ftd.device == "mobile" }: 24
-margin-horizontal.px if { ftd.device == "mobile" }: 24
+margin-horizontal.px if { ftd.device == "mobile" }: 0
 background.solid: $inherited.colors.background.step-1
 
 -- ftd.text: $distributors.title
@@ -1365,7 +1430,7 @@ spacing.fixed.px: 30
 
 -- title-text: License:
 text: $distributors.license
-url: $distributors.license
+url: $distributors.license-url
 
 -- title-text: Date Of Publish:
 text: $distributors.published-date
@@ -1374,7 +1439,7 @@ text: $distributors.published-date
 if: { distributors.used-by != NULL }
 text: $distributors.used-by
 
--- title-text: Likes:
+-- title-text: Likes / Stars:
 if: { distributors.likes != NULL }
 text: $distributors.likes
 
