@@ -864,6 +864,7 @@ height: auto
 -- end: ftd.column
 
 -- ftd.row:
+if: { !preview-card.wip }
 border-color: #2DD4BF
 border-radius.px: 5
 border-width.px: 1
@@ -1115,7 +1116,7 @@ text-align: center
 -- component layout:
 optional caption title: 
 string cta-text: Use this layout
-string cta-url: /
+optional string cta-url: 
 string previous-url: /
 
 -- ftd.column:
@@ -1155,7 +1156,7 @@ previous-url: $layout.previous-url
 -- component layout-desktop:
 string cta-text: 
 optional caption title:
-string cta-url: 
+optional string cta-url: 
 string previous-url: 
 boolean show-filter: false
 boolean $hover: false
@@ -1223,6 +1224,7 @@ padding-horizontal.px: 17
 border-width.px: 1
 
 -- ftd.row:
+if: { layout-desktop.cta-url != NULL }
 padding-vertical.px: 15
 padding-horizontal.px: 15
 spacing.fixed.px: 9
@@ -1270,7 +1272,7 @@ src: $assets.files.static.right-arrow-hover.svg
 
 -- component layout-mobile:
 string cta-text:
-string cta-url: 
+optional string cta-url: 
 string previous-url: 
 boolean show-filter: false
 boolean $hover: false
@@ -1341,6 +1343,7 @@ border-width.px: 1
 -- end: ftd.row
 
 -- ftd.row:
+if: { layout-mobile.cta-url != NULL }
 padding-vertical.px: 15
 padding-horizontal.px: 15
 spacing.fixed.px: 9
