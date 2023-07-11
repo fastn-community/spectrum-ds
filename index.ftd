@@ -819,8 +819,8 @@ height: fill-container
 align-content: center
 
 -- ftd.column:
-width.fixed.px: 190
-height.fixed.px: 166
+width.fixed.percent: 60
+height.fixed.percent: 60
 anchor: parent
 background.solid: $overlay-bg
 overflow: hidden
@@ -839,7 +839,7 @@ width.fixed.px: 48
 height.fixed.px: 48
 
 -- ftd.text: Coming Soon
-role: $inherited.types.button-medium
+role: $inherited.types.button-large
 color: #d9d9d9
 
 -- end: ftd.column
@@ -850,6 +850,10 @@ color: #d9d9d9
 src: $preview-card.image
 width: fill-container
 height: auto
+border-width.px: 1
+border-color: $inherited.colors.border
+classes if { preview-card.wip }: filter-2px
+css if { preview-card.wip }: [$assets.files.static.filter.css]
 
 -- end: ftd.column
 
