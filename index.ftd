@@ -1599,6 +1599,8 @@ background.solid: $inherited.colors.background.step-1
 margin-top.px: 16
 margin-bottom.px: 80
 
+-- ftd.desktop:
+
 -- ftd.row:
 width: fill-container
 align-content: center
@@ -1641,6 +1643,53 @@ width: fill-container
 
 -- end: ftd.row
 
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width: fill-container
+align-content: center
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 16
+padding-horizontal.px: 24
+padding-vertical.px: 40
+
+-- ftd.text: $hero.title
+role: $inherited.types.heading-hero
+color: $inherited.colors.text-strong
+
+-- ftd.text: 
+role: $inherited.types.copy-large
+color: $inherited.colors.text
+margin-bottom.px: 44
+width.fixed.percent: 80
+
+$hero.body
+
+-- cta-button: $hero.cta-text
+if: { hero.cta-text != NULL }
+role: primary
+link: $hero.cta-link
+show-arrow: true
+
+-- end: ftd.column
+
+-- ftd.column:
+width: fill-container
+
+-- ftd.image:
+src: $hero.image
+width: fill-container
+
+-- end: ftd.column
+
+-- end: ftd.column
+
+-- end: ftd.mobile
+
 -- end: ftd.column
 
 -- end: hero
@@ -1669,6 +1718,8 @@ background.solid: $inherited.colors.custom.two
 margin-top.px: 60
 margin-bottom.px: 80
 padding-vertical.px: 80
+
+-- ftd.desktop:
 
 -- ftd.row:
 width: fill-container
@@ -1719,6 +1770,58 @@ show-arrow: true
 
 -- end: ftd.row
 
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width: fill-container
+align-content: center
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 16
+padding-horizontal.px: 24
+padding-vertical.px: 40
+
+-- ftd.image:
+src: $category-hero.image
+width: fill-container
+
+-- end: ftd.column
+
+-- ftd.column:
+width: fill-container
+spacing.fixed.px: 32
+padding-horizontal.px: 24
+
+-- ftd.image:
+if: { category-hero.icon != NULL }
+src: $category-hero.icon
+
+-- ftd.text: $category-hero.title
+role: $inherited.types.heading-large
+color: $inherited.colors.text-strong
+
+-- ftd.text: 
+role: $inherited.types.copy-large
+color: $inherited.colors.text
+margin-bottom.px: 16
+
+$category-hero.body
+
+-- cta-button: $category-hero.cta-text
+if: { category-hero.cta-text != NULL }
+role: primary
+link: $category-hero.cta-link
+show-arrow: true
+
+-- end: ftd.column
+
+-- end: ftd.column
+
+-- end: ftd.mobile
+
 -- end: ftd.column
 
 -- end: category-hero
@@ -1737,15 +1840,23 @@ optional caption title:
 optional body body:
 optional ftd.image-src image:
 optional ftd.color bg-color: $inherited.colors.background.step-1
+optional ftd.color bg-color-mobile: $inherited.colors.background.step-1
 
 -- ftd.column:
-width.fixed.percent: 50
-background.solid: $zigzag-card.bg-color
+width.fixed.percent if { ftd.device == "desktop"}: 50
+width.fixed.percent if { ftd.device == "mobile"}: 100
+background.solid if { ftd.device == "desktop"}: $zigzag-card.bg-color
+background.solid if { ftd.device == "mobile"}: $zigzag-card.bg-color-mobile
 align-content: center
+
+-- ftd.desktop:
+
+-- ftd.column:
 min-width.fixed.px: 580
 max-height.fixed.px: 444
 min-height.fixed.px: 444
 padding.px: 34
+align-content: center
 
 -- ftd.column:
 if: { zigzag-card.image != NULL }
@@ -1776,6 +1887,55 @@ text-align: center
 $zigzag-card.body
 
 -- end: ftd.column
+
+-- end: ftd.column
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width: fill-container
+max-height.fixed.px: 444
+min-height.fixed.px: 444
+padding.px: 34
+align-content: center
+
+-- ftd.column:
+if: { zigzag-card.image != NULL }
+width: fill-container
+padding.px: 40
+align-content: center
+
+-- ftd.image:
+src: $zigzag-card.image
+width: fill-container
+
+-- end: ftd.column
+
+-- ftd.column:
+if: { zigzag-card.image == NULL }
+width: fill-container
+align-content: center
+spacing.fixed.px: 32
+
+-- ftd.text: $zigzag-card.title
+role: $inherited.types.heading-large
+color: $inherited.colors.text-strong
+text-align: center
+
+-- ftd.text: 
+role: $inherited.types.copy-large
+color: $inherited.colors.text-strong
+text-align: center
+
+$zigzag-card.body
+
+-- end: ftd.column
+
+-- end: ftd.column
+
+-- end: ftd.mobile
 
 -- end: ftd.column
 
@@ -1912,6 +2072,8 @@ children wrapper:
 width: fill-container
 align-content: center
 
+-- ftd.desktop:
+
 -- ftd.column:
 width: fill-container
 align-content: center
@@ -1921,6 +2083,20 @@ max-width.fixed.px: 1440
 padding-horizontal.px: 60
 
 -- end: ftd.column
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width: fill-container
+align-content: center
+children: $wrap-1440.wrapper
+spacing.fixed.px: 26
+
+-- end: ftd.column
+
+-- end: ftd.mobile
 
 -- end: ftd.column
 
@@ -1942,6 +2118,8 @@ children wrapper:
 width: fill-container
 align-content: center
 
+-- ftd.desktop:
+
 -- ftd.row:
 width: fill-container
 align-content: center
@@ -1953,6 +2131,21 @@ margin-bottom.px: 140
 wrap: true
 
 -- end: ftd.row
+
+-- end: ftd.desktop
+
+-- ftd.mobile:
+
+-- ftd.column:
+width: fill-container
+align-content: center
+children: $wrap-1440-row.wrapper
+margin-top.px: 60
+margin-bottom.px: 60
+
+-- end: ftd.column
+
+-- end: ftd.mobile
 
 -- end: ftd.column
 
