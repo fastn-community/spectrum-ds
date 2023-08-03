@@ -68,6 +68,7 @@ ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar: false
 boolean full-width: false
+boolean show-layout-bar: false
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -106,6 +107,7 @@ abstract-bar: $page.abstract-bar
 layout-bar: $page.layout-bar
 distribution-bar: $page.distribution-bar
 full-width: $page.full-width
+show-layout-bar: $page.show-layout-bar
 
 -- end: ftd.desktop
 
@@ -182,6 +184,7 @@ ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar:
 boolean full-width: false
+boolean show-layout-bar: false
 
 
 -- ftd.column:
@@ -205,15 +208,16 @@ github-icon: $doc-page-desktop.github-icon
 github-url: $doc-page-desktop.github-url
 
 -- ftd.column:
-if: { doc-page-desktop.distribution-bar }
+if: { doc-page-desktop.show-layout-bar }
 width: fill-container
 children: $doc-page-desktop.layout-bar
+align-content: center
 
 -- end: ftd.column
 
 
 -- ftd.column:
-if: { !doc-page-desktop.distribution-bar && !doc-page-desktop.full-width }
+if: { doc-page-desktop.title != NULL && !doc-page-desktop.distribution-bar && !doc-page-desktop.full-width }
 max-width.fixed.percent: 63.5
 align-self: center
 margin-top.px: 50
@@ -228,22 +232,23 @@ color: $inherited.colors.text-strong
 
 -- ftd.text: 
 if: { doc-page-desktop.body != NULL }
-text: $doc-page-desktop.body
 role: $inherited.types.copy-regular
 color: $inherited.colors.text
 text-align: center
 
+$doc-page-desktop.body
 
 -- end: ftd.column
 
 -- ftd.column:
-if: { !doc-page-desktop.distribution-bar && doc-page-desktop.full-width }
+if: { doc-page-desktop.title != NULL && !doc-page-desktop.distribution-bar && doc-page-desktop.full-width }
 width: fill-container
 align-self: center
 margin-top.px: 50
 margin-bottom.px: 50
 align-content: center
 spacing.fixed.px: 16
+max-width.fixed.px: 1440
 
 -- ftd.text: $doc-page-desktop.title
 if: { doc-page-desktop.title != NULL }
@@ -252,10 +257,11 @@ color: $inherited.colors.text-strong
 
 -- ftd.text: 
 if: { doc-page-desktop.body != NULL }
-text: $doc-page-desktop.body
 role: $inherited.types.copy-regular
 color: $inherited.colors.text
 text-align: center
+
+$doc-page-desktop.body
 
 -- end: ftd.column
 
@@ -286,6 +292,7 @@ toc-obj: $doc-page-desktop.toc
 
 -- ftd.column:
 width: fill-container
+max-width.fixed.px if {doc-page-desktop.full-width}: 1440
 align-content: top-left
 min-height.fixed.calc if { !ftd.is_empty(doc-page-desktop.toc) }: 100vh
 min-height.fixed.calc: 100vh - 135px
@@ -806,6 +813,7 @@ width: fill-container
 spacing.fixed.px: 30
 margin-bottom.px: 100
 margin-bottom.px if { ftd.device == "mobile"}: 40
+align-content: center
 
 -- ftd.text: $preview-card.title
 if: { preview-card.title != NULL }
@@ -1122,6 +1130,7 @@ optional caption title:
 string cta-text: Use this layout
 optional string cta-url: 
 string previous-url: /
+optional string github-url: /
 
 -- ftd.column:
 width: fill-container
@@ -1132,6 +1141,7 @@ width: fill-container
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
 previous-url: $layout.previous-url
+github-url: $layout.github-url
 
 -- end: ftd.desktop
 
@@ -1141,6 +1151,7 @@ previous-url: $layout.previous-url
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
 previous-url: $layout.previous-url
+github-url: $layout.github-url
 
 -- end: ftd.mobile
 
@@ -1164,13 +1175,16 @@ optional string cta-url:
 string previous-url: 
 boolean show-filter: false
 boolean $hover: false
+optional string github-url: 
 
 -- ftd.row:
 padding-vertical.px: 20
 padding-horizontal.px: 63
 width: fill-container
 background.solid: $inherited.colors.background.step-1
-margin-vertical.px: 50
+margin-vertical.px: 20
+align-content: center
+spacing.fixed.px: 24
 
 -- ftd.row:
 width: fill-container
@@ -1193,6 +1207,13 @@ color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
 
 -- end: ftd.row
+
+-- ftd.image: 
+src: $assets.files.static.icon-github.svg
+width.fixed.px: 24
+height.fixed.px: 24
+link: $layout-desktop.github-url
+open-in-new-tab: true
 
 -- ftd.row:
 spacing.fixed.px: 24
@@ -1281,6 +1302,7 @@ string previous-url:
 boolean show-filter: false
 boolean $hover: false
 optional caption title:
+optional string github-url: 
 
 -- ftd.column:
 padding-vertical.px: 24
@@ -1553,6 +1575,40 @@ link if { title-text.url != NULL }: $title-text.url
 -- end: ftd.column
 
 -- end: title-text
+
+
+
+
+
+
+
+
+
+
+-- component hero:
+caption title:
+optional body body:
+optional string cta-text:
+optional string cta-link:
+ftd.image-src image:
+
+-- ftd.row:
+width: fill-container
+align-content: center
+
+-- ftd.column:
+width.fixed.percent: 50
+
+-- ftd.text: $hero.title
+role: $inherited.types.heading-hero
+color: $in
+
+-- end: ftd.column
+-- end: ftd.row
+
+
+-- end: hero
+
 
 
 
