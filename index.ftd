@@ -807,6 +807,7 @@ string cta-url: /
 string cta-text: Preview
 boolean $hover: false
 boolean wip: false
+ftd.resizing width: fill-container
 
 -- ftd.column:
 width: fill-container
@@ -856,8 +857,7 @@ color: #d9d9d9
 
 -- ftd.image:
 src: $preview-card.image
-width: fill-container
-height: auto
+width: $preview-card.width
 border-width.px: 1
 border-color: $inherited.colors.border
 classes if { preview-card.wip }: filter-2px
@@ -870,8 +870,7 @@ if: { !preview-card.wip }
 
 -- ftd.image:
 src: $preview-card.image
-width: fill-container
-height: auto
+width: $preview-card.width
 
 -- end: ftd.column
 
