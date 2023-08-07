@@ -134,6 +134,7 @@ github-url: $page.github-url
 abstract-bar: $page.abstract-bar
 layout-bar: $page.layout-bar
 distribution-bar: $page.distribution-bar
+show-layout-bar: $page.show-layout-bar
 
 -- end: ftd.mobile
 
@@ -657,6 +658,7 @@ optional string github-url:
 ftd.ui list abstract-bar:
 ftd.ui list layout-bar:
 boolean distribution-bar: false
+boolean show-layout-bar: false
 
 -- ftd.column:
 width: fill-container
@@ -686,14 +688,15 @@ padding-vertical.px: 24
 min-height.fixed.calc: 100vh
 
 -- ftd.column:
-width: fill-container
-
--- ftd.column:
-if: { doc-page-mobile.distribution-bar }
+if: { doc-page-mobile.show-layout-bar }
 width: fill-container
 children: $doc-page-mobile.layout-bar
+align-content: center
 
 -- end: ftd.column
+
+-- ftd.column:
+width: fill-container
 
 -- ftd.column:
 if: { doc-page-mobile.distribution-bar }
@@ -1347,27 +1350,23 @@ margin-vertical.px: 50
 spacing.fixed.px: 64
 align-content: center
 
--- ftd.row:
+-- ftd.column:
 width: fill-container
-spacing.fixed.px: 10
-align-content: center
+spacing.fixed.px: 16
 
 -- ftd.text: Back
 color: $inherited.colors.text-strong
 role: $inherited.types.button-small
 link: $layout-mobile.previous-url
 
--- ftd.text: |   
-if: { layout-mobile.title != NULL }
-color: $inherited.colors.accent.primary
-role: $inherited.types.button-small
-
 -- ftd.text: $layout-mobile.title
 if: { layout-mobile.title != NULL }
 color: $inherited.colors.accent.primary
 role: $inherited.types.button-small
+text-align: center
+width: fill-container
 
--- end: ftd.row
+-- end: ftd.column
 
 -- ftd.row:
 if: { layout-mobile.show-filter }
