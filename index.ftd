@@ -1131,6 +1131,8 @@ string cta-text: Use this layout
 optional string cta-url: 
 string previous-url: /
 optional string github-url: /
+string cta-text-1: User Manual
+optional string cta-url-1: 
 
 -- ftd.column:
 width: fill-container
@@ -1140,6 +1142,8 @@ width: fill-container
 -- layout-desktop: $layout.title
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
+cta-text-1: $layout.cta-text-1
+cta-url-1: $layout.cta-url-1
 previous-url: $layout.previous-url
 github-url: $layout.github-url
 
@@ -1150,6 +1154,8 @@ github-url: $layout.github-url
 -- layout-mobile: $layout.title
 cta-text: $layout.cta-text
 cta-url: $layout.cta-url
+cta-text-1: $layout.cta-text-1
+cta-url-1: $layout.cta-url-1
 previous-url: $layout.previous-url
 github-url: $layout.github-url
 
@@ -1175,7 +1181,10 @@ optional string cta-url:
 string previous-url: 
 boolean show-filter: false
 boolean $hover: false
+boolean $show-hover: false
 optional string github-url: 
+string cta-text-1: User Manual
+optional string cta-url-1: 
 
 -- ftd.row:
 padding-vertical.px: 20
@@ -1249,6 +1258,30 @@ padding-horizontal.px: 17
 border-width.px: 1
 
 -- ftd.row:
+if: { layout-desktop.cta-url-1 != NULL }
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout-desktop.cta-url-1
+align-content: center
+width.fixed.px: 236
+open-in-new-tab: true
+$on-mouse-enter$: $ftd.set-bool($a = $layout-desktop.show-hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a = $layout-desktop.show-hover, v = false)
+background.solid if { layout-desktop.show-hover }: $inherited.colors.accent.primary
+border-color if { layout-desktop.show-hover }: $inherited.colors.accent.primary
+border-color: #2DD4BF
+border-radius.px: 5
+border-width.px: 1
+
+-- ftd.text: $layout-desktop.cta-text-1
+color: #2DD4BF
+color if { layout-desktop.show-hover }: #FFFFFF
+role: $inherited.types.button-medium
+
+-- end: ftd.row
+
+-- ftd.row:
 if: { layout-desktop.cta-url != NULL }
 padding-vertical.px: 15
 padding-horizontal.px: 15
@@ -1303,6 +1336,8 @@ boolean show-filter: false
 boolean $hover: false
 optional caption title:
 optional string github-url: 
+string cta-text-1: User Manual
+optional string cta-url-1: 
 
 -- ftd.column:
 padding-vertical.px: 24
@@ -1397,6 +1432,30 @@ src: $assets.files.static.right-arrow.svg
 -- ftd.image:
 if: { layout-mobile.hover }
 src: $assets.files.static.right-arrow-hover.svg
+
+-- end: ftd.row
+
+-- ftd.row:
+if: { layout-mobile.cta-url-1 != NULL }
+padding-vertical.px: 15
+padding-horizontal.px: 15
+spacing.fixed.px: 9
+link: $layout-mobile.cta-url-1
+align-content: center
+width.fixed.px: 236
+open-in-new-tab: true
+$on-mouse-enter$: $ftd.set-bool($a = $layout-mobile.hover, v = true)
+$on-mouse-leave$: $ftd.set-bool($a = $layout-mobile.hover, v = false)
+background.solid if { layout-mobile.hover }: $inherited.colors.accent.primary
+border-color if { layout-mobile.hover }: $inherited.colors.accent.primary
+border-color: #2DD4BF
+border-radius.px: 5
+border-width.px: 1
+
+-- ftd.text: $layout-mobile.cta-text-1
+color: #2DD4BF
+color if { layout-mobile.hover }: #FFFFFF
+role: $inherited.types.button-medium
 
 -- end: ftd.row
 
