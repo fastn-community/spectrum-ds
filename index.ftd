@@ -213,6 +213,7 @@ if: { doc-page-desktop.show-layout-bar }
 width: fill-container
 children: $doc-page-desktop.layout-bar
 align-content: center
+margin-bottom.px if { !doc-page-desktop.distribution-bar }: 48
 
 -- end: ftd.column
 
@@ -470,10 +471,20 @@ color if { childrens.toc.is-active }: $inherited.colors.cta-primary.base
 
 -- end: ftd.row
 
--- childrens:
+-- ftd.column:
 if: {!ftd.is_empty(childrens.toc.children) }
+margin-left.px: 12
+padding-left.px: 10
+margin-top.rem: 0.8
+padding-top.rem: 0.8
+margin-bottom.rem: 0.2
+spacing.fixed.rem: 2
+
+-- childrens:
 $loop$: $childrens.toc.children as $obj
 toc: $obj
+
+-- end: ftd.column
 
 -- end: ftd.column
 
@@ -895,6 +906,7 @@ $on-mouse-leave$: $ftd.set-bool($a = $preview-card.hover, v = false)
 background.solid if { preview-card.hover }: $inherited.colors.accent.primary
 border-color if { preview-card.hover }: $inherited.colors.accent.primary
 align-self if { ftd.device == "mobile" }: center
+margin-top.px: 32
 
 -- ftd.text: $preview-card.cta-text
 color: #2DD4BF
