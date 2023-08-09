@@ -1515,16 +1515,18 @@ optional ftd.image-src avatar:
 -- ftd.row:
 spacing.fixed.px: 16
 align-content: center
-open-in-new-tab: true
 link: $user-loop.profile
 
 -- ftd.image: 
 src: $user-loop.avatar
+max-width.fixed.px: 48
+border-radius.px: 100
 
 -- ftd.text: $user-loop.title
 role: $common.copy-small
 color: $inherited.colors.text-strong
 white-space: nowrap
+style: bold
 
 -- end: ftd.row
 
@@ -1562,7 +1564,7 @@ role: $inherited.types.heading-tiny
 color: $inherited.colors.accent.primary
 margin-bottom.px: 30
 
--- ftd.text: Created By:
+-- ftd.text: Contributors:
 role: $common.copy-small
 color: $inherited.colors.text
 margin-bottom.px: 16
@@ -1577,7 +1579,7 @@ spacing.fixed.px: 30
 text: $distributors.license
 url: $distributors.license-url
 
--- title-text: Date Of Publish:
+-- title-text: Date Of Publishing:
 text: $distributors.published-date
 
 -- title-text: Used by:
@@ -1605,7 +1607,6 @@ $loop$: $distributors.connect as $obj
 src: $obj.src
 cursor: pointer
 link: $obj.link
-open-in-new-tab: true
 
 -- end: ftd.row
 
