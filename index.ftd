@@ -2379,7 +2379,7 @@ src: $assets.files.static.right-arrow-hover.svg
 -- component contributor:
 caption title:
 string profile:
-ftd.image-src avatar:
+ftd.image-src avatar: $assets.files.static.avatar.jpg
 common.social-media list connect: 
 common.owner list owners:
 boolean $hover: false
