@@ -195,6 +195,7 @@ packages.
 
 -- record social-media:
 ftd.image-src src:
+optional ftd.image-src hover-src:
 string link: /
 
 -- social-media list social-link:
@@ -204,22 +205,27 @@ string link: /
 -- social-media:
 link: /
 src: $assets.files.static.meta.svg
+hover-src: $assets.files.static.meta.svg
 
 -- social-media: 
 link: /
 src: $assets.files.static.figma.svg
+hover-src: $assets.files.static.figma.svg
 
 -- social-media:
 link: /
 src: $assets.files.static.google.svg
+hover-src: $assets.files.static.google.svg
 
 -- social-media: 
 link: /
 src: $assets.files.static.tweak.svg
+hover-src: $assets.files.static.tweak.svg
 
 -- social-media: 
 link: /
 src: $assets.files.static.ball.svg
+hover-src: $assets.files.static.ball.svg
 
 -- end: social-links
 
@@ -233,12 +239,14 @@ src: $assets.files.static.ball.svg
 caption title:
 optional string profile:
 optional ftd.image-src avatar:
+optional string role:
 
 -- owner list owners:
 
 -- owner: Muskaan Verma
 profile: /
 avatar: $assets.files.static.avatar.svg
+role: Designer
 
 -- end: owners
 
