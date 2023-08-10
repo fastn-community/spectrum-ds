@@ -1576,7 +1576,7 @@ role: $obj.role
 -- component user-loop:
 caption title:
 optional string profile:
-optional ftd.image-src avatar:
+ftd.image-src avatar: $assets.files.static.avatar.jpg
 optional string role:
 
 -- ftd.row:

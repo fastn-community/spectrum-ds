@@ -238,7 +238,7 @@ hover-src: $assets.files.static.ball.svg
 -- record owner:
 caption title:
 optional string profile:
-optional ftd.image-src avatar:
+ftd.image-src avatar: $assets.files.static.avatar.jpg
 optional string role:
 
 -- owner list owners:
