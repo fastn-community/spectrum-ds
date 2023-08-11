@@ -1686,7 +1686,7 @@ spacing.fixed.px: 16
 text: $distributors.license
 url: $distributors.license-url
 
--- title-text: Published on
+-- title-text: Published
 text: $distributors.published-date
 
 /-- title-text: Used by:
