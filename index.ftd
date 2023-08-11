@@ -1623,6 +1623,16 @@ border-radius.px: 105
 padding-vertical.px: 4
 padding-horizontal.px: 8
 
+-- ftd.text: $user-loop.role
+if: { user-loop.role != "Designer" && user-loop.role != "Developer" }
+role: $inherited.types.fine-print
+color: white
+white-space: nowrap
+background.solid: $inherited.colors.custom.two
+border-radius.px: 105
+padding-vertical.px: 4
+padding-horizontal.px: 8
+
 -- end: ftd.column
 
 -- end: ftd.row
@@ -2416,6 +2426,16 @@ role: $inherited.types.fine-print
 color: $inherited.colors.text-strong
 white-space: nowrap
 background.solid: $inherited.colors.custom.two
+border-radius.px: 105
+padding-vertical.px: 4
+padding-horizontal.px: 8
+
+-- ftd.text: $contributor.profile
+if: { contributor.profile != "Designer" && contributor.profile != "Developer" }
+role: $inherited.types.fine-print
+color: white
+white-space: nowrap
+background.solid: $inherited.colors.custom.one
 border-radius.px: 105
 padding-vertical.px: 4
 padding-horizontal.px: 8
