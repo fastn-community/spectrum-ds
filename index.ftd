@@ -1682,11 +1682,11 @@ owners: $distributors.owners
 -- ftd.column:
 spacing.fixed.px: 16
 
--- title-text: License:
+-- title-text: License
 text: $distributors.license
 url: $distributors.license-url
 
--- title-text: Date Of Publishing:
+-- title-text: Published on
 text: $distributors.published-date
 
 /-- title-text: Used by:
@@ -1739,15 +1739,15 @@ optional string url:
 width: fill-container
 spacing.fixed.px: 4
 
--- ftd.text: $title-text.title
-color: $inherited.colors.text
-role: $common.copy-small
-
 -- ftd.text: $title-text.text
-role: $inherited.types.fine-print
+role: $inherited.types.copy-regular
 color: $inherited.colors.text-strong
 style: medium
 link if { title-text.url != NULL }: $title-text.url
+
+-- ftd.text: $title-text.title
+color: #666666
+role: $inherited.types.fine-print
 
 -- end: ftd.column
 
