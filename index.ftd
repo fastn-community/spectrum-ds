@@ -850,10 +850,10 @@ boolean $hover: false
 boolean wip: false
 ftd.resizing width: fill-container
 optional string github-url:
-optional string cta-2-text:
-optional string cta-3-text:
-optional string cta-2-url:
-optional string cta-3-url:
+optional string cta-2-text: 
+optional string cta-3-text: 
+optional string cta-2-url: 
+optional string cta-3-url: 
 
 -- ftd.column:
 width: fill-container
@@ -943,7 +943,7 @@ if: { !preview-card.wip && preview-card.cta-2-text != NULL}
 cta-url: $preview-card.cta-2-url
 
 -- primary-button: $preview-card.cta-3-text
-if: { !preview-card.wip && preview-card.cta-2-text != NULL}
+if: { !preview-card.wip && preview-card.cta-3-text != NULL}
 cta-url: $preview-card.cta-3-url
 
 -- end: ftd.row
@@ -981,7 +981,7 @@ cta-url: $preview-card.cta-2-url
 -- end: ftd.row
 
 -- primary-button: $preview-card.cta-3-text
-if: { !preview-card.wip && preview-card.cta-2-text != NULL}
+if: { !preview-card.wip && preview-card.cta-3-text != NULL}
 cta-url: $preview-card.cta-3-url
 
 -- end: ftd.column
