@@ -71,6 +71,8 @@ boolean full-width: false
 boolean show-layout-bar: false
 boolean full-width-bar: false
 ftd.ui list full-width-wrap:
+boolean search: true
+optional string search-url: /search/
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -112,6 +114,8 @@ full-width: $page.full-width
 show-layout-bar: $page.show-layout-bar
 full-width-bar: $page.full-width-bar
 full-width-wrap: $page.full-width-wrap
+search: $page.search
+search-url: $page.search-url
 
 -- end: ftd.desktop
 
@@ -141,6 +145,8 @@ distribution-bar: $page.distribution-bar
 show-layout-bar: $page.show-layout-bar
 full-width-bar: $page.full-width-bar
 full-width-wrap: $page.full-width-wrap
+search: $page.search
+search-url: $page.search-url
 
 -- end: ftd.mobile
 
@@ -194,6 +200,8 @@ boolean full-width: false
 boolean show-layout-bar: false
 boolean full-width-bar: false
 ftd.ui list full-width-wrap:
+boolean search: false
+optional string search-url:
 
 -- ftd.column:
 width: fill-container
@@ -214,6 +222,8 @@ current-url: /
 menu-icon: $assets.files.static.hamburger.svg
 github-icon: $doc-page-desktop.github-icon
 github-url: $doc-page-desktop.github-url
+search: $doc-page-desktop.search
+search-url: $doc-page-desktop.search-url
 
 -- ftd.column:
 if: { doc-page-desktop.show-layout-bar }
@@ -688,6 +698,8 @@ boolean distribution-bar: false
 boolean show-layout-bar: false
 boolean full-width-bar: false
 ftd.ui list full-width-wrap: 
+boolean search: false
+optional string search-url:
 
 -- ftd.column:
 width: fill-container
@@ -709,6 +721,8 @@ current-url: /
 menu-icon: $assets.files.static.hamburger.svg
 github-icon: $doc-page-mobile.github-icon
 github-url: $doc-page-mobile.github-url
+search: $doc-page-mobile.search
+search-url: $doc-page-mobile.search-url
 
 -- ftd.column:
 width: fill-container
