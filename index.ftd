@@ -73,6 +73,8 @@ boolean full-width-bar: false
 ftd.ui list full-width-wrap:
 boolean search: true
 optional string search-url: /search/
+boolean fluid-width: true
+optional ftd.resizing max-width:
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -116,6 +118,8 @@ full-width-bar: $page.full-width-bar
 full-width-wrap: $page.full-width-wrap
 search: $page.search
 search-url: $page.search-url
+fluid-width: $page.fluid-width
+max-width: $page.max-width
 
 -- end: ftd.desktop
 
@@ -202,9 +206,12 @@ boolean full-width-bar: false
 ftd.ui list full-width-wrap:
 boolean search: false
 optional string search-url:
+boolean fluid-width: 
+optional ftd.resizing max-width:
 
 -- ftd.column:
 width: fill-container
+align-content: center
 
 -- h.header:
 sections: $doc-page-desktop.sections
@@ -224,6 +231,13 @@ github-icon: $doc-page-desktop.github-icon
 github-url: $doc-page-desktop.github-url
 search: $doc-page-desktop.search
 search-url: $doc-page-desktop.search-url
+fluid-width: $doc-page-desktop.fluid-width
+max-width.fixed.px: $doc-page-desktop.max-width
+
+-- ftd.column:
+width: fill-container
+max-width.fixed.px: $doc-page-desktop.max-width
+align-content: center
 
 -- ftd.column:
 if: { doc-page-desktop.show-layout-bar }
@@ -288,7 +302,6 @@ $doc-page-desktop.body
 width: fill-container
 spacing.fixed.px: 32
 align-content if { ftd.is_empty(doc-page-desktop.toc) && !doc-page-desktop.distribution-bar }: center
-padding-horizontal.px if { doc-page-desktop.distribution-bar }: 53
 margin-top.px if { doc-page-desktop.distribution-bar }: 50
 
 -- ftd.column:
@@ -310,8 +323,8 @@ min-height.fixed.calc if { !ftd.is_empty(doc-page-desktop.toc) }: 100vh
 min-height.fixed.calc: 100vh - 135px
 children: $doc-page-desktop.wrapper
 spacing.fixed.em: 0.8
-padding-left.px if { !doc-page-desktop.distribution-bar }: 30
-padding-right.px if { !doc-page-desktop.distribution-bar }: 48
+padding-left.px if { !doc-page-desktop.distribution-bar }: 24
+padding-right.px if { !doc-page-desktop.distribution-bar }: 24
 
 -- end: ftd.column
 
@@ -329,7 +342,8 @@ height.fixed.calc: 100% - 0px
 if: { doc-page-desktop.full-width-bar }
 width: fill-container
 children: $doc-page-desktop.full-width-wrap
-padding-horizontal.px: 48
+
+-- end: ftd.column
 
 -- end: ftd.column
 
