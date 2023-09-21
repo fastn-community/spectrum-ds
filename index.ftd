@@ -959,7 +959,7 @@ src: $assets.files.static.icon-github.svg
 width.fixed.px: 24
 height.fixed.px: 24
 link: $preview-card.github-url
-margin-top.px: 10
+margin-top.px: 30
 open-in-new-tab: true
 
 -- primary-button: $preview-card.cta-text
