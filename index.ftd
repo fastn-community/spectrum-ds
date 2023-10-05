@@ -76,8 +76,6 @@ boolean search: true
 optional string search-url: /search/
 boolean fluid-width: true
 optional ftd.resizing max-width:
-optional string primary-text:
-optional boolean selected: false
 
 -- ftd.document:
 title if { page.document-title != NULL }: $page.document-title
@@ -134,11 +132,9 @@ show-layout-bar: $page.show-layout-bar
 full-width-bar: $page.full-width-bar
 full-width-wrap: $page.full-width-wrap
 search: $page.search
-selected: $page.selected
 search-url: $page.search-url
 fluid-width: $page.fluid-width
 max-width: $page.max-width
-primary-text: $page.primary-text
 
 -- end: ftd.desktop
 
@@ -227,8 +223,6 @@ boolean search: false
 optional string search-url:
 boolean fluid-width: 
 optional ftd.resizing max-width:
-optional string primary-text:
-optional boolean selected:
 
 -- ftd.column:
 width: fill-container
@@ -286,8 +280,8 @@ color: $inherited.colors.text-strong
 if: { doc-page-desktop.title != NULL && !doc-page-desktop.distribution-bar && doc-page-desktop.full-width }
 width: fill-container
 align-self: center
-;;margin-top.px: 50
-;;margin-bottom.px: 50
+margin-top.px: 50
+margin-bottom.px: 50
 align-content: center
 spacing.fixed.px: 16
 max-width.fixed.px: 1440
