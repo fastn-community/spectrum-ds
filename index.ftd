@@ -948,7 +948,7 @@ width: $preview-card.width
 -- ftd.column:
 if: { preview-card.mouse-in }
 width.fixed.px: 1006
-height.fixed.px: 725
+height: fill-container
 border-radius.px: 6
 background.solid: $inherited.colors.cta-primary.hover
 anchor: parent
@@ -963,6 +963,7 @@ border-radius.px: 30
 padding-vertical.px: 12
 width.fixed.px: 125
 padding-horizontal.px: 24
+spacing.fixed.px: 10
 align-content: center
 background.solid: $inherited.colors.cta-secondary.base
 
@@ -972,6 +973,10 @@ role: $inherited.types.copy-small
 white-space: nowrap
 style: bold
 link: $preview-card.demo-url
+
+-- ftd.image:
+src: $assets.files.static.btn-open.svg
+width.fixed.px: 16
 
 -- end: ftd.row
 
@@ -2375,7 +2380,6 @@ caption title:
 optional string link:
 boolean $hover:
 
-
 -- ftd.row:
 border-radius.px: 30
 padding-vertical.px: 12
@@ -2389,8 +2393,7 @@ $on-click$: $ftd.toggle($a = $selected)
 
 -- ftd.text: Select Design
 if: {!selected}
-color: $inherited.colors.text-strong
-color if { cta-primary-button.hover }: $inherited.colors.text-strong
+color: $inherited.colors.cta-tertiary.text
 role: $inherited.types.copy-small
 white-space: nowrap
 style: bold
@@ -2399,12 +2402,12 @@ style: bold
 if: {selected}
 spacing.fixed.px: 4
 
-/-- ftd.image:
-src: $fastn-assets.files.images.featured.left.png
+-- ftd.image:
+src: $assets.files.static.tick.svg
+width.fixed.px: 24
 
 -- ftd.text: Selected design
-color: $inherited.colors.text-strong
-color if { cta-primary-button.hover }: $inherited.colors.text-strong
+color: $inherited.colors.cta-tertiary.text
 role: $inherited.types.copy-small
 white-space: nowrap
 style: bold 
@@ -2414,6 +2417,8 @@ style: bold
 -- end: ftd.row
 
 -- end: cta-primary-button
+
+
 
 
 
