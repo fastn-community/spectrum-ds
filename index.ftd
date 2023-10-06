@@ -2499,7 +2499,7 @@ align-self if { ftd.device == "mobile" }: center
 
 -- ftd.text: $primary-button.cta-text
 color: $inherited.colors.text-strong
-color if { primary-button.hover }: $inherited.colors.text-strong
+color if { primary-button.hover }: $inherited.colors.cta-tertiary.text
 role: $inherited.types.copy-small
 white-space: nowrap
 style: bold
