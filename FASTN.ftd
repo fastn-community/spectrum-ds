@@ -8,6 +8,7 @@
 -- fastn.dependency: fastn-community.github.io/typography
 -- fastn.dependency: fastn-community.github.io/footer
 -- fastn.dependency: fastn-community.github.io/dark-mode-switcher
+-- fastn.dependency: fastn-community.github.io/banner
 
 -- fastn.auto-import: fastn
 -- fastn.auto-import: fastn-community.github.io/header as h

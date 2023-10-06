@@ -74,6 +74,8 @@ boolean full-width-bar: false
 ftd.ui list full-width-wrap:
 boolean search: true
 optional string search-url: /search/
+optional string get-started-url: /getting-started/
+optional boolean right-section: true
 boolean fluid-width: true
 optional ftd.resizing max-width:
 
@@ -135,6 +137,8 @@ search: $page.search
 search-url: $page.search-url
 fluid-width: $page.fluid-width
 max-width: $page.max-width
+get-started-url: $page.get-started-url
+right-section: $page.right-section
 
 -- end: ftd.desktop
 
@@ -223,6 +227,8 @@ boolean search: false
 optional string search-url:
 boolean fluid-width: 
 optional ftd.resizing max-width:
+optional string get-started-url: /getting-started/
+optional boolean right-section: true
 
 -- ftd.column:
 width: fill-container
@@ -248,6 +254,8 @@ search: $doc-page-desktop.search
 search-url: $doc-page-desktop.search-url
 fluid-width: $doc-page-desktop.fluid-width
 max-width.fixed.px: $doc-page-desktop.max-width
+get-started-url: $doc-page-desktop.get-started-url
+right-section: $doc-page-desktop.right-section
 
 -- ftd.column:
 width: fill-container
@@ -267,6 +275,7 @@ margin-bottom.px if { !doc-page-desktop.distribution-bar }: 48
 width: fill-container
 spacing: space-between
 margin-top.px: 24
+padding-horizontal.px: 24
 
 -- ftd.text: $doc-page-desktop.title
 role: $inherited.types.heading-large
@@ -2376,19 +2385,15 @@ spacing.fixed.px: 26
 
 
 -- component cta-primary-button:
-caption title:
+optional caption title:
 optional string link:
-boolean $hover:
 
 -- ftd.row:
 border-radius.px: 30
 padding-vertical.px: 12
 padding-horizontal.px: 24
 align-content: center
-$on-mouse-enter$: $ftd.set-bool($a = $cta-primary-button.hover, v = true)
-$on-mouse-leave$: $ftd.set-bool($a = $cta-primary-button.hover, v = false)
 background.solid: $inherited.colors.accent.primary
-background.solid if { cta-primary-button.hover }: $inherited.colors.accent.hover
 $on-click$: $ftd.toggle($a = $selected)
 
 -- ftd.text: Select Design
