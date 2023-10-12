@@ -954,10 +954,11 @@ $on-mouse-leave$: $ftd.set-bool($a=$preview-card.mouse-in, v = false)
 -- ftd.image:
 src: $preview-card.image
 width: $preview-card.width
+border-radius.px: 6
 
 -- ftd.column:
 if: { preview-card.mouse-in }
-width.fixed.px: 1006
+width: fill-container
 height: fill-container
 border-radius.px: 6
 background.solid: $inherited.colors.cta-primary.hover
