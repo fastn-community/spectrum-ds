@@ -315,6 +315,7 @@ width: fill-container
 spacing.fixed.px: 32
 align-content if { ftd.is_empty(doc-page-desktop.toc) && !doc-page-desktop.distribution-bar }: center
 margin-top.px if { doc-page-desktop.distribution-bar }: 40
+padding-horizontal.px: 24
 
 -- ftd.column:
 width.fixed.percent: 30
